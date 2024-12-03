@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Treemap</title>
+  <script src="echarts.min.js"></script>
+  <style>
+    /* Set HTML, body, and #treemap to cover the full screen */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+
+    }
+
+    #treemap {
+      width: 100%;
+      height: 100vh;
+      /* Full viewport height */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="treemap"></div>
+
+  <script>
+    let chart;
+    // 定义函数以从URL接口加载数据并渲染图表
+    async function fetchDataAndRender() {
+      // Set the document's title to the current date and time
+      document.title = "行业云图 " + getFormattedDateTime();
+      try {
+        // 替换为你的API接口地址
+        let headersList = {
+          "Accept": "*/*",
+          "Authorization": `${localStorage.getItem('authToken')}`
+        }
+
+        let response = await fetch(
+          location.origin + "/api/stock_board_industry_cons_em", {
+            method: "GET",
+            headers: headersList
+          });
+
+        // // Check if the response indicates that the user is not logged in
+        // if (response.status === 401 || response.status === 403 || response.status === 503) {
+        //   // Redirect to login page with the intended destination as a query parameter
+        //   const currentHost = window.location.host;
+        //   const redirectURL = `http://${currentHost}/app/login.html?redirect=` +
+        //     encodeURIComponent(`http://${currentHost}/app/stock/concept_inflow_treemap.html`);
+        //   window.location.href = redirectURL;
+
+        //   return;
+        // }
+        const data = await response.json();
+        let groupedData = []
+        // Step 1: Find max positive and min negative net inflow
+        const maxNetInflow = Math.max(...data.map(item => item["涨跌幅"]).filter(val => val > 0));
+        const minNetInflow = Math.min(...data.map(item => item["涨跌幅"]).filter(val => val < 0));
+
+        function formatNumber(value) {
+          if (value == null) return
+          if (Math.abs(value) >= 100000000) {
+            return (value / 100000000).toFixed(2) + '亿';
+          } else if (Math.abs(value) >= 10000) {
+            return (value / 10000).toFixed(2) + '万';
+          } else {
+            return value.toString();
+          }
+        }
+
+        function mapItem(item) {
+          const netInflow = item["涨跌幅"];
+          let color_area;
+          let color_text;
+          if (netInflow > 0) {
+            // Scale transparency relative to maxNetInflow (positive)
+            const opacity = netInflow / maxNetInflow * 0.8 + 0.2;
+            color_area = `rgba(255, 0, 0, ${opacity})`; // Red for positive inflow
+            color_text = `rgba(0, 128, 0, ${opacity})`
+          } else if (netInflow <
+            0) { // Scale transparency relative to minNetInflow (negative) 
+            const opacity = Math.abs(netInflow / minNetInflow) * 0.8 + 0.2;
+            color_area = `rgba(0, 128, 0, ${opacity})`;
+            color_text = `rgba(255, 0, 0, ${opacity})`
+          } else {
+            color_area = 'rgba(128, 128, 128, 0.8)';
+          }
+          if ((item["最新价"] < 0 && item["涨跌幅"] < 0) || (item["最新价"] > 0 && item["涨跌幅"] >
+              0))
+            color_text = 'rgba(255, 255, 255, 1)'; // White text for positive inflow
+          return {
+            name: item["名称"],
+            value: Math.abs(item["成交额"]), //面积大小基于今日主力净流入 - 净额
+            label: {
+              show: true,
+              formatter: function () {
+                return `{title|${item["名称"]}}\n\n{rate|${item["涨跌幅"]}%}\n\n${(item["最新价"])}`
+              },
+              rich: {
+                rate: {
+                  fontSize: 12, // Title font size
+                  color: 'white', // Title color
+                  fontWeight: 'Heavy',
+                },
+                title: {
+                  fontSize: 14, // Title font size
+                  fontWeight: 'bold',
+                  color: 'white' // Title color
+                },
+              },
+              textStyle: {
+                color: 'white', // 可设置颜色
+                fontSize: 8 // 其他文本内容的默认字体大小
+              }
+            },
+            tooltip: {
+              formatter: `
+            ${item["名称"]}<br />
+            最新价: ${item["最新价"]}<br />
+            涨跌幅: ${item["涨跌幅"]}%<br />
+            成交额: ${formatNumber(item["成交额"])}<br />
+            振幅: ${item["振幅"]}%<br />
+            换手率: ${formatNumber(item["换手率"])}
+            `
+            },
+            itemStyle: {
+              color: color_area
+            }
+          };
+        }
+        debugger
+        for (let i = 0; i < data.length; i++) {
+          const record = data[i];
+          if (record["名称"].toLowerCase().includes('*st')) continue
+          let sector = groupedData.find(f => f.name == record['行业'])
+          if (!sector) {
+            groupedData.push({
+              name: record['行业'],
+              value: record['成交额'],
+              children: [mapItem(record)]
+            })
+          } else {
+            sector.value += record['成交额']
+            sector.children.push(mapItem(record))
+          }
+        }
+        groupedData.forEach(f => {
+          f.tooltip = {
+            formatter: `${f.name}<br>数量:${f.children.length}<br>成交额:${formatNumber(f.value)}`
+          }
+        })
+
+        function getLevelOption() {
+          return [{
+              itemStyle: {
+                borderColor: '#555',
+                borderWidth: 0,
+                gapWidth: 1
+              },
+              upperLabel: {
+                show: false
+              }
+            },
+            {
+              itemStyle: {
+                borderColor: '#111',
+                borderWidth: 5,
+                gapWidth: 1,
+              },
+              emphasis: {
+                itemStyle: {
+                  borderColor: '#ffe'
+                }
+              }
+            }
+          ];
+        }
+
+        // 配置 treemap 图表的选项
+        const option = {
+          // title: {
+          //   text: '今日主力净流入分布图',
+          //   left: 'center'
+          // },
+          tooltip: {
+            trigger: 'item',
+            formatter: '{b}: {c}'
+          },
+          series: [{
+            type: 'treemap',
+            data: groupedData,
+            visibleMin: 500,
+            levels: getLevelOption(),
+            label: {
+              show: true,
+            },
+            upperLabel: {
+              show: true,
+              formatter: '{b}',
+            },
+            itemStyle: {
+              borderColor: 'black',
+              borderWidth: 1.5
+            },
+            width: "100%",
+            height: "100%",
+            roam: true,
+            scaleLimit: {
+              min: 1,
+              max: 9
+            },
+            nodeClick: true,
+            breadcrumb: {
+              show: false
+            }
+          }]
+        };
+
+        // 使用设置好的配置项渲染图表
+        chart.setOption(option);
+
+
+      } catch (error) {
+        console.error('数据加载失败:', error);
+      }
+    }
+
+    // Format current date and time
+    function getFormattedDateTime() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      return `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Initialize ECharts instance if not already initialized
+    if (!chart) {
+      chart = echarts.init(document.getElementById('treemap'), 'dark');
+      // Make chart responsive
+      window.addEventListener('resize', () => {
+        chart.resize();
+      });
+    }
+    // Run fetchDataAndRender when the page loads
+    window.onload = async function () {
+      await fetchDataAndRender(); // Initial load
+      setInterval(fetchDataAndRender, 60000); // Refresh every 60 seconds
+    };
+  </script>
+</body>
+
+</html>

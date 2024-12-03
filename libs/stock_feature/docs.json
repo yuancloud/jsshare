@@ -1,0 +1,138 @@
+[
+    {
+        "name": "stock_a_below_net_asset_statistics",
+        "doc": "破净股统计历史走势\nhttps://www.legulegu.com/stockdata/below-net-asset-statistics\n:param symbol: choice of {\"全部A股\", \"沪深300\", \"上证50\", \"中证500\"}\n:type symbol: str\n:return: 破净股统计历史走势"
+    },
+    {
+        "name": "stock_zh_a_spot_em",
+        "doc": "东方财富网-沪深京 A 股-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#hs_a_board\n:return: 实时行情"
+    },
+    {
+        "name": "stock_sh_a_spot_em",
+        "doc": "东方财富网-沪 A 股-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#hs_a_board\n:return: 实时行情"
+    },
+    {
+        "name": "stock_sz_a_spot_em",
+        "doc": "东方财富网-深 A 股-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#hs_a_board\n:return: 实时行情"
+    },
+    {
+        "name": "stock_bj_a_spot_em",
+        "doc": "东方财富网-京 A 股-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#hs_a_board\n:return: 实时行情"
+    },
+    {
+        "name": "stock_new_a_spot_em",
+        "doc": "东方财富网-新股-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#newshares\n:return: 实时行情"
+    },
+    {
+        "name": "stock_cy_a_spot_em",
+        "doc": "东方财富网-创业板-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#gem_board\n:return: 实时行情"
+    },
+    {
+        "name": "stock_kc_a_spot_em",
+        "doc": "东方财富网-科创板-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#kcb_board\n:return: 实时行情"
+    },
+    {
+        "name": "stock_zh_b_spot_em",
+        "doc": "东方财富网- B 股-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#hs_a_board\n:return: 实时行情"
+    },
+    {
+        "name": "code_id_map_em",
+        "doc": "东方财富-股票和市场代码\nhttps://quote.eastmoney.com/center/gridlist.html#hs_a_board\n:return: 股票和市场代码\n:rtype: dict"
+    },
+    {
+        "name": "stock_zh_a_hist",
+        "doc": "东方财富网-行情首页-沪深京 A 股-每日行情\nhttps://quote.eastmoney.com/concept/sh603777.html?from=classic\n:param symbol: 股票代码\n:type symbol: str\n:param period: choice of {'daily', 'weekly', 'monthly'}\n:type period: str\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:param adjust: choice of {\"qfq\": \"前复权\", \"hfq\": \"后复权\", \"\": \"不复权\"}\n:type adjust: str\n:param timeout: choice of None or a positive float number\n:type timeout: float\n:return: 每日行情"
+    },
+    {
+        "name": "stock_zh_a_hist_min_em",
+        "doc": "东方财富网-行情首页-沪深京 A 股-每日分时行情\nhttps://quote.eastmoney.com/concept/sh603777.html?from=classic\n:param symbol: 股票代码\n:type symbol: str\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:param period: choice of {'1', '5', '15', '30', '60'}\n:type period: str\n:param adjust: choice of {'', 'qfq', 'hfq'}\n:type adjust: str\n:return: 每日分时行情"
+    },
+    {
+        "name": "stock_zh_a_hist_pre_min_em",
+        "doc": "东方财富网-行情首页-沪深京 A 股-每日分时行情包含盘前数据\nhttps://quote.eastmoney.com/concept/sh603777.html?from=classic\n:param symbol: 股票代码\n:type symbol: str\n:param start_time: 开始时间\n:type start_time: str\n:param end_time: 结束时间\n:type end_time: str\n:return: 每日分时行情包含盘前数据"
+    },
+    {
+        "name": "stock_hk_spot_em",
+        "doc": "东方财富网-港股-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#hk_stocks\n:return: 港股-实时行情"
+    },
+    {
+        "name": "stock_hk_main_board_spot_em",
+        "doc": "东方财富网-港股-主板-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#hk_mainboard\n:return: 港股-主板-实时行情"
+    },
+    {
+        "name": "stock_hk_hist",
+        "doc": "东方财富网-行情-港股-每日行情\nhttps://quote.eastmoney.com/hk/08367.html\n:param symbol: 港股-每日行情\n:type symbol: str\n:param period: choice of {'daily', 'weekly', 'monthly'}\n:type period: str\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:param adjust: choice of {\"qfq\": \"1\", \"hfq\": \"2\", \"\": \"不复权\"}\n:type adjust: str\n:return: 每日行情"
+    },
+    {
+        "name": "stock_hk_hist_min_em",
+        "doc": "东方财富网-行情-港股-每日分时行情\nhttps://quote.eastmoney.com/hk/00948.html\n:param symbol: 股票代码\n:type symbol: str\n:param period: choice of {'1', '5', '15', '30', '60'}\n:type period: str\n:param adjust: choice of {'', 'qfq', 'hfq'}\n:type adjust: str\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:return: 每日分时行情"
+    },
+    {
+        "name": "stock_us_spot_em",
+        "doc": "东方财富网-美股-实时行情\nhttps://quote.eastmoney.com/center/gridlist.html#us_stocks\n:return: 美股-实时行情; 延迟 15 min"
+    },
+    {
+        "name": "stock_us_hist",
+        "doc": "东方财富网-行情-美股-每日行情\nhttps://quote.eastmoney.com/us/ENTX.html#fullScreenChart\n:param symbol: 股票代码; 此股票代码需要通过调用 ak.stock_us_spot_em() 的 `代码` 字段获取\n:type symbol: str\n:param period: choice of {'daily', 'weekly', 'monthly'}\n:type period: str\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:param adjust: choice of {\"qfq\": \"1\", \"hfq\": \"2\", \"\": \"不复权\"}\n:type adjust: str\n:return: 每日行情"
+    },
+    {
+        "name": "stock_us_hist_min_em",
+        "doc": "东方财富网-行情首页-美股-每日分时行情\nhttps://quote.eastmoney.com/us/ATER.html\n:param symbol: 股票代码\n:type symbol: str\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:return: 每日分时行情"
+    },
+    {
+        "name": "stock_a_high_low_statistics",
+        "doc": "乐咕乐股-创新高、新低的股票数量\nhttps://www.legulegu.com/stockdata/high-low-statistics\n:param symbol: choice of {\"all\", \"sz50\", \"hs300\", \"zz500\"}\n:type symbol: str\n:return: 创新高、新低的股票数量"
+    },
+    {
+        "name": "get_cookie_csrf",
+        "doc": "乐咕乐股-主板市盈率\nhttps://legulegu.com/stockdata/shanghaiPE\n:return: 指定市场的市盈率数据"
+    },
+    {
+        "name": "get_token_lg",
+        "doc": "生成乐咕的 token\nhttps://legulegu.com/s/002488\n:return: token\n:rtype: str"
+    },
+    {
+        "name": "stock_a_indicator_lg",
+        "doc": "市盈率, 市净率, 股息率数据接口\nhttps://legulegu.com/stocklist\n:param symbol: 通过 ak.stock_a_indicator_lg(symbol=\"all\") 来获取所有股票的代码\n:type symbol: str\n:return: 市盈率, 市净率, 股息率查询"
+    },
+    {
+        "name": "stock_hk_indicator_eniu",
+        "doc": "亿牛网-港股指标\nhttps://eniu.com/gu/hk01093/roe\n:param symbol: 港股代码\n:type symbol: str\n:param indicator: 需要获取的指标, choice of {\"港股\", \"市盈率\", \"市净率\", \"股息率\", \"ROE\", \"市值\"}\n:type indicator: str\n:return: 指定 symbol 和 indicator 的数据"
+    },
+    {
+        "name": "stock_lhb_detail_em",
+        "doc": "东方财富网-数据中心-龙虎榜单-龙虎榜详情\nhttps://data.eastmoney.com/stock/tradedetail.html\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:return: 龙虎榜详情"
+    },
+    {
+        "name": "stock_lhb_stock_statistic_em",
+        "doc": "东方财富网-数据中心-龙虎榜单-个股上榜统计\nhttps://data.eastmoney.com/stock/tradedetail.html\n:param symbol: choice of {\"近一月\", \"近三月\", \"近六月\", \"近一年\"}\n:type symbol: str\n:return: 个股上榜统计"
+    },
+    {
+        "name": "stock_lhb_jgmmtj_em",
+        "doc": "东方财富网-数据中心-龙虎榜单-机构买卖每日统计\nhttps://data.eastmoney.com/stock/jgmmtj.html\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:return: 机构买卖每日统计"
+    },
+    {
+        "name": "stock_lhb_jgstatistic_em",
+        "doc": "东方财富网-数据中心-龙虎榜单-机构席位追踪\nhttps://data.eastmoney.com/stock/jgstatistic.html\n:param symbol: choice of {\"近一月\", \"近三月\", \"近六月\", \"近一年\"}\n:type symbol: str\n:return: 机构席位追踪"
+    },
+    {
+        "name": "stock_lhb_hyyyb_em",
+        "doc": "东方财富网-数据中心-龙虎榜单-每日活跃营业部\nhttps://data.eastmoney.com/stock/hyyyb.html\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:return: 每日活跃营业部"
+    },
+    {
+        "name": "stock_lhb_yybph_em",
+        "doc": "东方财富网-数据中心-龙虎榜单-营业部排行\nhttps://data.eastmoney.com/stock/yybph.html\n:param symbol: choice of {\"近一月\", \"近三月\", \"近六月\", \"近一年\"}\n:type symbol: str\n:return: 营业部排行"
+    },
+    {
+        "name": "stock_lhb_traderstatistic_em",
+        "doc": "东方财富网-数据中心-龙虎榜单-营业部统计\nhttps://data.eastmoney.com/stock/traderstatistic.html\n:param symbol: choice of {\"近一月\", \"近三月\", \"近六月\", \"近一年\"}\n:type symbol: str\n:return: 营业部统计"
+    },
+    {
+        "name": "stock_lhb_stock_detail_date_em",
+        "doc": "东方财富网-数据中心-龙虎榜单-个股龙虎榜详情-日期\nhttps://data.eastmoney.com/stock/tradedetail.html\n:param symbol: 股票代码\n:type symbol: str\n:return: 个股龙虎榜详情-日期"
+    },
+    {
+        "name": "stock_lhb_stock_detail_em",
+        "doc": "东方财富网-数据中心-龙虎榜单-个股龙虎榜详情\nhttps://data.eastmoney.com/stock/lhb/600077.html\n:param symbol: 股票代码\n:type symbol: str\n:param date: 查询日期; 需要通过 ak.stock_lhb_stock_detail_date_em(symbol=\"600077\") 接口获取相应股票的有龙虎榜详情数据的日期\n:type date: str\n:param flag: choice of {\"买入\", \"卖出\"}\n:type flag: str\n:return: 个股龙虎榜详情"
+    }
+]

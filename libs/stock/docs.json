@@ -1,0 +1,369 @@
+[{
+        "name": "stock_industry_pe_ratio_cninfo",
+        "doc": "巨潮资讯-数据中心-行业分析-行业市盈率\nhttp://webapi.cninfo.com.cn/#/thematicStatistics\n:param symbol: choice of {\"证监会行业分类\", \"国证行业分类\"}\n:type symbol: str\n:param date: 查询日期\n:type date: str\n:return: 行业市盈率"
+    },
+    {
+        "name": "stock_sector_spot",
+        "doc": "新浪行业-板块行情\nhttp://finance.sina.com.cn/stock/sl/\n:param indicator: choice of {\"新浪行业\", \"启明星行业\", \"概念\", \"地域\", \"行业\"}\n:type indicator: str\n:return: 指定 indicator 的数据"
+    },
+    {
+        "name": "stock_sector_detail",
+        "doc": "新浪行业-板块行情-成份详情\nhttp://finance.sina.com.cn/stock/sl/#area_1\n:param sector: stock_sector_spot 返回的 label 值, choice of {\"新浪行业\", \"概念\", \"地域\", \"行业\"}; \"启明星行业\" 无详情\n:type sector: str\n:return: 指定 sector 的板块详情"
+    },
+    {
+        "name": "stock_cg_equity_mortgage_cninfo",
+        "doc": "巨潮资讯-数据中心-专题统计-公司治理-股权质押\nhttps://webapi.cninfo.com.cn/#/thematicStatistics\n:param date: 开始统计时间\n:type date: str\n:return: 股权质押"
+    },
+    {
+        "name": "stock_js_weibo_nlp_time",
+        "doc": "特定时间表示的字典\nhttps://datacenter.jin10.com/market\n:return: 特定时间表示的字典\n:rtype: dict"
+    },
+    {
+        "name": "stock_js_weibo_report",
+        "doc": "金十数据中心-实时监控-微博舆情报告\nhttps://datacenter.jin10.com/market\n:param time_period: {'CNHOUR2': '2小时', 'CNHOUR6': '6小时', 'CNHOUR12': '12小时', 'CNHOUR24': '1天', 'CNDAY7': '1周', 'CNDAY30': '1月'}\n:type time_period: str\n:return: 指定时间段的微博舆情报告"
+    },
+    {
+        "name": "stock_hold_num_cninfo",
+        "doc": "巨潮资讯-数据中心-专题统计-股东股本-股东人数及持股集中度\nhttps://webapi.cninfo.com.cn/#/thematicStatistics\n:param date: choice of {\"XXXX0331\", \"XXXX0630\", \"XXXX0930\", \"XXXX1231\"}; 从 20170331 开始\n:type date: str\n:return: 股东人数及持股集中度"
+    },
+    {
+        "name": "stock_hk_hot_rank_em",
+        "doc": "东方财富-个股人气榜-人气榜-港股市场\nhttps://guba.eastmoney.com/rank/\n:return: 人气榜"
+    },
+    {
+        "name": "stock_hk_hot_rank_detail_em",
+        "doc": "东方财富-个股人气榜-历史趋势\nhttps://guba.eastmoney.com/rank/stock?code=HK_00700\n:param symbol: 带市场表示的证券代码\n:type symbol: str\n:return: 个股的历史趋势"
+    },
+    {
+        "name": "stock_hk_hot_rank_detail_realtime_em",
+        "doc": "东方财富-个股人气榜-实时变动\nhttps://guba.eastmoney.com/rank/stock?code=HK_00700\n:param symbol: 带市场表示的证券代码\n:type symbol: str\n:return: 实时变动"
+    },
+    {
+        "name": "stock_hk_hot_rank_latest_em",
+        "doc": "东方财富-个股人气榜-最新排名\nhttps://guba.eastmoney.com/rank/stock?code=HK_00700\n:param symbol: 带市场表示的证券代码\n:type symbol: str\n:return: 最新排名"
+    },
+    {
+        "name": "stock_hk_famous_spot_em",
+        "doc": "东方财富网-行情中心-港股市场-知名港股\nhttps://quote.eastmoney.com/center/gridlist.html#hk_wellknown\n:return: 知名美股实时行情"
+    },
+    {
+        "name": "stock_board_industry_name_em",
+        "doc": "东方财富网-沪深板块-行业板块-名称\nhttps://quote.eastmoney.com/center/boardlist.html#industry_board\n:return: 行业板块-名称"
+    },
+    {
+        "name": "stock_board_industry_spot_em",
+        "doc": "东方财富网-沪深板块-行业板块-实时行情\nhttps://quote.eastmoney.com/bk/90.BK1027.html\n:param symbol: 板块名称 or 东财板块代码\n:type symbol: str\n:return: 实时行情"
+    },
+    {
+        "name": "stock_board_industry_hist_em",
+        "doc": "东方财富网-沪深板块-行业板块-历史行情\nhttps://quote.eastmoney.com/bk/90.BK1027.html\n:param symbol: 板块名称\n:type symbol: str\n:param start_date: 开始时间\n:type start_date: str\n:param end_date: 结束时间\n:type end_date: str\n:param period: 周期; choice of {\"日k\", \"周k\", \"月k\"}\n:type period: str\n:param adjust: choice of {'': 不复权, \"qfq\": 前复权, \"hfq\": 后复权}\n:type adjust: str\n:return: 历史行情"
+    },
+    {
+        "name": "stock_board_industry_hist_min_em",
+        "doc": "东方财富网-沪深板块-行业板块-分时历史行情\nhttps://quote.eastmoney.com/bk/90.BK1027.html\n:param symbol: 板块名称\n:type symbol: str\n:param period: choice of {\"1\", \"5\", \"15\", \"30\", \"60\"}\n:type period: str\n:return: 分时历史行情"
+    },
+    {
+        "name": "stock_board_industry_cons_em",
+        "doc": "东方财富网-沪深板块-行业板块-板块成份\nhttps://data.eastmoney.com/bkzj/BK1027.html\n:param symbol: 板块名称\n:type symbol: str\n:return: 板块成份"
+    },
+    {
+        "name": "stock_zh_a_tick_tx_js",
+        "doc": "腾讯财经-历史分笔数据\nhttps://gu.qq.com/sz300494/gp/detail\n:param symbol: 股票代码\n:type symbol: str\n:return: 历史分笔数据"
+    },
+    {
+        "name": "stock_individual_fund_flow",
+        "doc": "东方财富网-数据中心-资金流向-个股\nhttps://data.eastmoney.com/zjlx/detail.html\n:param stock: 股票代码\n:type stock: str\n:param market: 股票市场; 上海证券交易所: sh, 深证证券交易所: sz, 北京证券交易所: bj;\n:type market: str\n:return: 近期个股的资金流数据"
+    },
+    {
+        "name": "stock_individual_fund_flow_rank",
+        "doc": "东方财富网-数据中心-资金流向-排名\nhttps://data.eastmoney.com/zjlx/detail.html\n:param indicator: choice of {\"今日\", \"3日\", \"5日\", \"10日\"}\n:type indicator: str\n:return: 指定 indicator 资金流向排行"
+    },
+    {
+        "name": "stock_market_fund_flow",
+        "doc": "东方财富网-数据中心-资金流向-大盘\nhttps://data.eastmoney.com/zjlx/dpzjlx.html\n:return: 近期大盘的资金流数据"
+    },
+    {
+        "name": "stock_sector_fund_flow_rank",
+        "doc": "东方财富网-数据中心-资金流向-板块资金流-排名\nhttps://data.eastmoney.com/bkzj/hy.html\n:param indicator: choice of {\"今日\", \"5日\", \"10日\"}\n:type indicator: str\n:param sector_type: choice of {\"行业资金流\", \"概念资金流\", \"地域资金流\"}\n:type sector_type: str\n:return: 指定参数的资金流排名数据"
+    },
+    {
+        "name": "stock_sector_fund_flow_summary",
+        "doc": "东方财富网-数据中心-资金流向-行业资金流-xx行业个股资金流\nhttps://data.eastmoney.com/bkzj/BK1034.html\n:param symbol: 行业名称\n:type symbol: str\n:param indicator: choice of {\"今日\", \"5日\", \"10日\"}\n:type indicator: str\n:return: xx行业个股资金流"
+    },
+    {
+        "name": "stock_sector_fund_flow_hist",
+        "doc": "东方财富网-数据中心-资金流向-行业资金流-行业历史资金流\nhttps://data.eastmoney.com/bkzj/BK1034.html\n:param symbol: 行业名称\n:type symbol: str\n:return: xx行业个股资金流"
+    },
+    {
+        "name": "stock_concept_fund_flow_hist",
+        "doc": "东方财富网-数据中心-资金流向-概念资金流-概念历史资金流\nhttps://data.eastmoney.com/bkzj/BK0574.html\n:param symbol: 概念名称\n:type symbol: str\n:return: 概念历史资金流"
+    },
+    {
+        "name": "stock_main_fund_flow",
+        "doc": "东方财富网-数据中心-资金流向-主力净流入排名\nhttps://data.eastmoney.com/zjlx/list.html\n:param symbol: 全部股票; choice of {\"全部股票\", \"沪深A股\", \"沪市A股\", \"科创板\", \"深市A股\", \"创业板\", \"沪市B股\", \"深市B股\"}\n:type symbol: str\n:return: 主力净流入排名"
+    },
+    {
+        "name": "stock_industry_clf_hist_sw",
+        "doc": "申万宏源研究-行业分类-全部行业分类\nhttps://www.swsresearch.com/swindex/pdf/SwClass2021/StockClassifyUse_stock.xls\n:return: 个股行业分类变动历史"
+    },
+    {
+        "name": "stock_dzjy_sctj",
+        "doc": "东方财富网-数据中心-大宗交易-市场统计\nhttp://data.eastmoney.com/dzjy/dzjy_sctj.aspx\n:return: 市场统计表"
+    },
+    {
+        "name": "stock_dzjy_mrmx",
+        "doc": "东方财富网-数据中心-大宗交易-每日明细\nhttp://data.eastmoney.com/dzjy/dzjy_mrmxa.aspx\n:param symbol: choice of {'A股', 'B股', '基金', '债券'}\n:type symbol: str\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:return: 每日明细"
+    },
+    {
+        "name": "stock_dzjy_mrtj",
+        "doc": "东方财富网-数据中心-大宗交易-每日统计\nhttp://data.eastmoney.com/dzjy/dzjy_mrtj.aspx\n:param start_date: 开始日期\n:type start_date: str\n:param end_date: 结束日期\n:type end_date: str\n:return: 每日统计"
+    },
+    {
+        "name": "stock_dzjy_hygtj",
+        "doc": "东方财富网-数据中心-大宗交易-活跃 A 股统计\nhttp://data.eastmoney.com/dzjy/dzjy_hygtj.aspx\n:param symbol: choice of {'近一月', '近三月', '近六月', '近一年'}\n:type symbol: str\n:return: 活跃 A 股统计"
+    },
+    {
+        "name": "stock_dzjy_hyyybtj",
+        "doc": "东方财富网-数据中心-大宗交易-活跃营业部统计\nhttps://data.eastmoney.com/dzjy/dzjy_hyyybtj.html\n:param symbol: choice of {'当前交易日', '近3日', '近5日', '近10日', '近30日'}\n:type symbol: str\n:return: 活跃营业部统计"
+    },
+    {
+        "name": "stock_dzjy_yybph",
+        "doc": "东方财富网-数据中心-大宗交易-营业部排行\nhttp://data.eastmoney.com/dzjy/dzjy_yybph.aspx\n:param symbol: choice of {'近一月', '近三月', '近六月', '近一年'}\n:type symbol: str\n:return: 营业部排行"
+    },
+    {
+        "name": "stock_hk_fhpx_detail_ths",
+        "doc": "同花顺-港股-分红派息\nhttps://stockpage.10jqka.com.cn/HK0700/bonus/\n:param symbol: 港股代码\n:type symbol: str\n:return: 分红派息"
+    },
+    {
+        "name": "stock_profile_cninfo",
+        "doc": "巨潮资讯-个股-公司概况\nhttps://webapi.cninfo.com.cn/#/company\n:param symbol: 股票代码\n:type symbol: str\n:return: 公司概况\n:raise: Exception，如果服务器返回的数据无法被解析"
+    },
+    {
+        "name": "stock_zh_kcb_report_em",
+        "doc": "科创板报告内容\nhttps://data.eastmoney.com/notices/kcb.html\n:param from_page: 开始获取的页码\n:type from_page: int\n:param to_page: 结束获取的页码\n:type to_page: int\n:return: 科创板报告内容"
+    },
+    {
+        "name": "stock_hot_up_em",
+        "doc": "东方财富-个股人气榜-飙升榜\nhttps://guba.eastmoney.com/rank/\n:return: 飙升榜"
+    },
+    {
+        "name": "stock_dividend_cninfo",
+        "doc": "巨潮资讯-个股-历史分红\nhttps://webapi.cninfo.com.cn/#/company?companyid=600009\n:param symbol: 股票代码\n:type symbol: str\n:return: 历史分红"
+    },
+    {
+        "name": "stock_price_js",
+        "doc": "美股目标价 or 港股目标价\nhttps://www.ushknews.com/report.html\n:param symbol: choice of {\"us\", \"hk\"}\n:type symbol: str\n:return: 美股目标价 or 港股目标价"
+    },
+    {
+        "name": "stock_us_pink_spot_em",
+        "doc": "东方财富网-行情中心-美股市场-粉单市场\nhttps://quote.eastmoney.com/center/gridlist.html#us_pinksheet\n:return: 粉单市场实时行情"
+    },
+    {
+        "name": "stock_staq_net_stop",
+        "doc": "东方财富网-行情中心-沪深个股-两网及退市\nhttps://quote.eastmoney.com/center/gridlist.html#staq_net_board\n:return: 两网及退市"
+    },
+    {
+        "name": "stock_intraday_em",
+        "doc": "东财财富-分时数据\nhttps://quote.eastmoney.com/f1.html?newcode=0.000001\n:param symbol: 股票代码\n:type symbol: str\n:return: 分时数据"
+    },
+    {
+        "name": "stock_repurchase_em",
+        "doc": "东方财富网-数据中心-股票回购-股票回购数据\nhttps://data.eastmoney.com/gphg/hglist.html\n:return: 股票回购数据"
+    },
+    {
+        "name": "stock_intraday_sina",
+        "doc": "新浪财经-日内分时数据\nhttps://vip.stock.finance.sina.com.cn/quotes_service/view/cn_bill.php?symbol=sz000001\n:param symbol: 股票代码\n:type symbol: str\n:param date: 交易日\n:type date: str\n:return: 分时数据"
+    },
+    {
+        "name": "stock_individual_info_em",
+        "doc": "东方财富-个股-股票信息\nhttps://quote.eastmoney.com/concept/sh603777.html?from=classic\n:param symbol: 股票代码\n:type symbol: str\n:param timeout: choice of None or a positive float number\n:type timeout: float\n:return: 股票信息"
+    },
+    {
+        "name": "stock_hot_rank_em",
+        "doc": "东方财富-个股人气榜-人气榜\nhttps://guba.eastmoney.com/rank/\n:return: 人气榜"
+    },
+    {
+        "name": "stock_hot_rank_detail_em",
+        "doc": "东方财富-个股人气榜-历史趋势及粉丝特征\nhttps://guba.eastmoney.com/rank/stock?code=000665\n:param symbol: 带市场表示的证券代码\n:type symbol: str\n:return: 个股的历史趋势及粉丝特征"
+    },
+    {
+        "name": "stock_hot_rank_detail_realtime_em",
+        "doc": "东方财富-个股人气榜-实时变动\nhttps://guba.eastmoney.com/rank/stock?code=000665\n:param symbol: 带市场表示的证券代码\n:type symbol: str\n:return: 实时变动"
+    },
+    {
+        "name": "stock_hot_keyword_em",
+        "doc": "东方财富-个股人气榜-热门关键词\nhttps://guba.eastmoney.com/rank/stock?code=000665\n:param symbol: 带市场表示的证券代码\n:type symbol: str\n:return: 热门关键词"
+    },
+    {
+        "name": "stock_hot_rank_latest_em",
+        "doc": "东方财富-个股人气榜-最新排名\nhttps://guba.eastmoney.com/rank/stock?code=000665\n:param symbol: 带市场表示的证券代码\n:type symbol: str\n:return: 最新排名"
+    },
+    {
+        "name": "stock_hot_rank_relate_em",
+        "doc": "东方财富-个股人气榜-相关股票\nhttps://guba.eastmoney.com/rank/stock?code=000665\n:param symbol: 带市场表示的证券代码\n:type symbol: str\n:return: 相关股票"
+    },
+    {
+        "name": "get_us_stock_name",
+        "doc": "u.s. stock's english name, chinese name and symbol you should use symbol to get apply into the next function\nhttps://finance.sina.com.cn/stock/usstock/sector.shtml\n:return: stock's english name, chinese name and symbol"
+    },
+    {
+        "name": "stock_us_spot",
+        "doc": "新浪财经-所有美股的数据, 注意延迟 15 分钟\nhttps://finance.sina.com.cn/stock/usstock/sector.shtml\n:return: 美股所有股票实时行情"
+    },
+    {
+        "name": "stock_us_daily",
+        "doc": "新浪财经-美股\nhttps://finance.sina.com.cn/stock/usstock/sector.shtml\n备注：\n1. CIEN 新浪复权因子错误\n2. AI 新浪复权因子错误, 该股票刚上市未发生复权, 但是返回复权因子\n:param symbol: 可以使用 get_us_stock_name 获取\n:type symbol: str\n:param adjust: \"\": 返回未复权的数据 ; qfq: 返回前复权后的数据; qfq-factor: 返回前复权因子和调整;\n:type adjust: str\n:return: 指定 adjust 的数据"
+    },
+    {
+        "name": "stock_bid_ask_em",
+        "doc": "东方财富-行情报价\nhttps://quote.eastmoney.com/sz000001.html\n:param symbol: 股票代码\n:type symbol: str\n:return: 行情报价"
+    },
+    {
+        "name": "stock_zh_a_st_em",
+        "doc": "东方财富网-行情中心-沪深个股-风险警示板\nhttps://quote.eastmoney.com/center/gridlist.html#st_board\n:return: 风险警示板"
+    },
+    {
+        "name": "stock_zh_a_new_em",
+        "doc": "东方财富网-行情中心-沪深个股-新股\nhttps://quote.eastmoney.com/center/gridlist.html#newshares\n:return: 新股"
+    },
+    {
+        "name": "stock_zh_a_stop_em",
+        "doc": "东方财富网-行情中心-沪深个股-两网及退市\nhttp://quote.eastmoney.com/center/gridlist.html#staq_net_board\n:return: 两网及退市"
+    },
+    {
+        "name": "stock_zh_a_new",
+        "doc": "新浪财经-行情中心-沪深股市-次新股\nhttp://vip.stock.finance.sina.com.cn/mkt/#new_stock\n:return: 次新股行情数据"
+    },
+    {
+        "name": "stock_board_concept_name_em",
+        "doc": "东方财富网-行情中心-沪深京板块-概念板块-名称\nhttps://quote.eastmoney.com/center/boardlist.html#concept_board\n:return: 概念板块-名称"
+    },
+    {
+        "name": "stock_board_concept_hist_em",
+        "doc": "东方财富网-沪深板块-概念板块-历史行情\nhttps://quote.eastmoney.com/bk/90.BK0715.html\n:param symbol: 板块名称\n:type symbol: str\n:type period: 周期; choice of {\"daily\", \"weekly\", \"monthly\"}\n:param period: 板块名称\n:param start_date: 开始时间\n:type start_date: str\n:param end_date: 结束时间\n:type end_date: str\n:param adjust: choice of {'': 不复权, \"qfq\": 前复权, \"hfq\": 后复权}\n:type adjust: str\n:return: 历史行情"
+    },
+    {
+        "name": "stock_board_concept_hist_min_em",
+        "doc": "东方财富网-沪深板块-概念板块-分时历史行情\nhttps://quote.eastmoney.com/bk/90.BK0715.html\n:param symbol: 板块名称\n:type symbol: str\n:param period: choice of {\"1\", \"5\", \"15\", \"30\", \"60\"}\n:type period: str\n:return: 分时历史行情"
+    },
+    {
+        "name": "stock_board_concept_cons_em",
+        "doc": "东方财富-沪深板块-概念板块-板块成份\nhttps://quote.eastmoney.com/center/boardlist.html#boards-BK06551\n:param symbol: 板块名称\n:type symbol: str\n:return: 板块成份"
+    },
+    {
+        "name": "stock_cg_guarantee_cninfo",
+        "doc": "巨潮资讯-数据中心-专题统计-公司治理-对外担保\nhttps://webapi.cninfo.com.cn/#/thematicStatistics\n:param symbol: choice of {\"全部\", \"深市主板\", \"沪市\", \"创业板\", \"科创板\"}\n:type symbol: str\n:param start_date: 开始统计时间\n:type start_date: str\n:param end_date: 结束统计时间\n:type end_date: str\n:return: 对外担保"
+    },
+    {
+        "name": "stock_zh_ah_spot",
+        "doc": "腾讯财经-港股-AH-实时行情\nhttps://stockapp.finance.qq.com/mstats/#mod=list&id=hk_ah&module=HK&type=AH&sort=3&page=3&max=20\n:return: 腾讯财经-港股-AH-实时行情"
+    },
+    {
+        "name": "stock_zh_ah_name",
+        "doc": "腾讯财经-港股-AH-股票名称\nhttps://stockapp.finance.qq.com/mstats/#mod=list&id=hk_ah&module=HK&type=AH\n:return: 股票代码和股票名称的字典"
+    },
+    {
+        "name": "stock_zh_ah_daily",
+        "doc": "腾讯财经-港股-AH-股票历史行情\nhttps://gu.qq.com/hk01033/gp\n:param symbol: 股票代码\n:type symbol: str\n:param start_year: 开始年份; e.g., “2000”\n:type start_year: str\n:param end_year: 结束年份; e.g., “2019”\n:type end_year: str\n:param adjust: 'qfq': 前复权, 'hfq': 后复权\n:type adjust: str\n:return: 指定股票在指定年份的日频率历史行情数据"
+    },
+    {
+        "name": "stock_news_main_cx",
+        "doc": "财新网-财新数据通\nhttps://cxdata.caixin.com/pc/\n:return: 特定时间表示的字典"
+    },
+    {
+        "name": "stock_hold_control_cninfo",
+        "doc": "巨潮资讯-数据中心-专题统计-股东股本-实际控制人持股变动\nhttps://webapi.cninfo.com.cn/#/thematicStatistics\n:param symbol: choice of {\"单独控制\", \"实际控制人\", \"一致行动人\", \"家族控制\", \"全部\"}; 从 2010 开始\n:type symbol: str\n:return: 实际控制人持股变动"
+    },
+    {
+        "name": "stock_hold_management_detail_cninfo",
+        "doc": "巨潮资讯-数据中心-专题统计-股东股本-高管持股变动明细\nhttps://webapi.cninfo.com.cn/#/thematicStatistics\n:param symbol: choice of {\"增持\", \"减持\"}\n:type symbol: str\n:return: 高管持股变动明细"
+    },
+    {
+        "name": "stock_share_change_cninfo",
+        "doc": "巨潮资讯-股本股东-公司股本变动\nhttps://webapi.cninfo.com.cn/#/apiDoc\n查询 p_stock2215 接口\n:param symbol: 股票代码\n:type symbol: str\n:param start_date: 开始变动日期\n:type start_date: str\n:param end_date: 结束变动日期\n:type end_date: str\n:return: 公司股本变动"
+    },
+    {
+        "name": "stock_report_fund_hold",
+        "doc": "东方财富网-数据中心-主力数据-基金持仓\nhttp://data.eastmoney.com/zlsj/2020-12-31-1-2.html\n:param symbol: choice of {\"基金持仓\", \"QFII持仓\", \"社保持仓\", \"券商持仓\", \"保险持仓\", \"信托持仓\"}\n:type symbol: str\n:param date: 财报发布日期, xxxx-03-31, xxxx-06-30, xxxx-09-30, xxxx-12-31\n:type date: str\n:return: 基金持仓数据"
+    },
+    {
+        "name": "stock_report_fund_hold_detail",
+        "doc": "东方财富网-数据中心-主力数据-基金持仓-明细\nhttp://data.eastmoney.com/zlsj/ccjj/2020-12-31-008286.html\n:param symbol: 基金代码\n:type symbol: str\n:param date: 财报发布日期, xxxx-03-31, xxxx-06-30, xxxx-09-30, xxxx-12-31\n:type date: str\n:return: 基金持仓-明细数据"
+    },
+    {
+        "name": "stock_hold_management_detail_em",
+        "doc": "东方财富网-数据中心-特色数据-高管持股-董监高及相关人员持股变动明细\nhttps://data.eastmoney.com/executive/list.html\n:return: 董监高及相关人员持股变动明细"
+    },
+    {
+        "name": "stock_hold_management_person_em",
+        "doc": "东方财富网-数据中心-特色数据-高管持股-人员增减持股变动明细\nhttps://data.eastmoney.com/executive/personinfo.html?name=%E5%90%B4%E8%BF%9C&code=001308\n:param symbol: 股票代码\n:type name: str\n:param name: 高管名称\n:type symbol: str\n:return: 人员增减持股变动明细"
+    },
+    {
+        "name": "stock_rank_forecast_cninfo",
+        "doc": "巨潮资讯-数据中心-评级预测-投资评级\nhttps://webapi.cninfo.com.cn/#/thematicStatistics?name=%E6%8A%95%E8%B5%84%E8%AF%84%E7%BA%A7\n:param date: 查询日期\n:type date: str\n:return: 投资评级"
+    },
+    {
+        "name": "stock_industry_category_cninfo",
+        "doc": "巨潮资讯-行业分类数据\nhttps://webapi.cninfo.com.cn/#/apiDoc\n查询 p_public0002 接口\n:param symbol: 行业类型; choice of {\"证监会行业分类标准\", \"巨潮行业分类标准\", \"申银万国行业分类标准\",\n\"新财富行业分类标准\", \"国资委行业分类标准\", \"巨潮产业细分标准\", \"天相行业分类标准\", \"全球行业分类标准\"}\n:type symbol: str\n:return: 行业分类数据"
+    },
+    {
+        "name": "stock_industry_change_cninfo",
+        "doc": "巨潮资讯-上市公司行业归属的变动情况\nhttps://webapi.cninfo.com.cn/#/apiDoc\n查询 p_stock2110 接口\n:param symbol: 股票代码\n:type symbol: str\n:param start_date: 开始变动日期\n:type start_date: str\n:param end_date: 结束变动日期\n:type end_date: str\n:return: 行业归属的变动情况"
+    },
+    {
+        "name": "stock_info_sz_name_code",
+        "doc": "深圳证券交易所-股票列表\nhttps://www.szse.cn/market/product/stock/list/index.html\n:param symbol: choice of {\"A股列表\", \"B股列表\", \"CDR列表\", \"AB股列表\"}\n:type symbol: str\n:return: 指定 indicator 的数据"
+    },
+    {
+        "name": "stock_info_sh_name_code",
+        "doc": "上海证券交易所-股票列表\nhttps://www.sse.com.cn/assortment/stock/list/share/\n:param symbol: choice of {\"主板A股\": \"1\", \"主板B股\": \"2\", \"科创板\": \"8\"}\n:type symbol: str\n:return: 指定 indicator 的数据"
+    },
+    {
+        "name": "stock_info_bj_name_code",
+        "doc": "北京证券交易所-股票列表\nhttps://www.bse.cn/nq/listedcompany.html\n:return: 股票列表"
+    },
+    {
+        "name": "stock_info_sh_delist",
+        "doc": "上海证券交易所-终止上市公司\nhttps://www.sse.com.cn/assortment/stock/list/delisting/\n:param symbol: choice of {\"全部\", \"沪市\", \"科创板\"}\n:type symbol: str\n:return: 终止上市公司"
+    },
+    {
+        "name": "stock_info_sz_delist",
+        "doc": "深证证券交易所-暂停上市公司-终止上市公司\nhttps://www.szse.cn/market/stock/suspend/index.html\n:param symbol: choice of {\"暂停上市公司\", \"终止上市公司\"}\n:type symbol: str\n:return: 暂停上市公司 or 终止上市公司 的数据"
+    },
+    {
+        "name": "stock_info_sz_change_name",
+        "doc": "深证证券交易所-市场数据-股票数据-名称变更\nhttps://www.szse.cn/www/market/stock/changename/index.html\n:param symbol: choice of {\"全称变更\": \"tab1\", \"简称变更\": \"tab2\"}\n:type symbol: str\n:return: 名称变更数据"
+    },
+    {
+        "name": "stock_info_change_name",
+        "doc": "新浪财经-股票曾用名\nhttps://vip.stock.finance.sina.com.cn/corp/go.php/vCI_CorpInfo/stockid/300378.phtml\n:param symbol: 股票代码\n:type symbol: str\n:return: 股票曾用名\n:rtype: list"
+    },
+    {
+        "name": "stock_info_a_code_name",
+        "doc": "沪深京 A 股列表\n:return: 沪深京 A 股数据"
+    },
+    {
+        "name": "stock_hk_spot",
+        "doc": "新浪财经-港股的所有港股的实时行情数据\nhttp://vip.stock.finance.sina.com.cn/mkt/#qbgg_hk\n:return: 实时行情数据"
+    },
+    {
+        "name": "stock_hk_daily",
+        "doc": "新浪财经-港股-个股的历史行情数据\nhttps://stock.finance.sina.com.cn/hkstock/quotes/02912.html\n:param symbol: 可以使用 stock_hk_spot 获取\n:type symbol: str\n:param adjust: \"\": 返回未复权的数据 ; qfq: 返回前复权后的数据; qfq-factor: 返回前复权因子和调整;\n:type adjust: str\n:return: 指定 adjust 的数据"
+    },
+    {
+        "name": "stock_allotment_cninfo",
+        "doc": "巨潮资讯-个股-配股实施方案\nhttps://webapi.cninfo.com.cn/#/dataBrowse\n:param symbol: 股票代码\n:type symbol: str\n:param start_date: 开始查询的日期\n:type symbol: str\n:param end_date: 结束查询的日期\n:type symbol: str\n:return: 配股实施方案"
+    },
+    {
+        "name": "stock_us_famous_spot_em",
+        "doc": "东方财富网-行情中心-美股市场-知名美股\nhttps://quote.eastmoney.com/center/gridlist.html#us_wellknown\n:symbol: choice of {'科技类', '金融类', '医药食品类', '媒体类', '汽车能源类', '制造零售类'}\n:type: str\n:return: 知名美股实时行情"
+    },
+    {
+        "name": "stock_gsrl_gsdt_em",
+        "doc": "东方财富网-数据中心-股市日历-公司动态\nhttps://data.eastmoney.com/gsrl/gsdt.html\n:param date: 交易日\n:type date: str\n:return: 公司动态"
+    },
+    {
+        "name": "stock_ipo_summary_cninfo",
+        "doc": "巨潮资讯-个股-上市相关\nhttps://webapi.cninfo.com.cn/#/company\n:param symbol: 股票代码\n:type symbol: str\n:return: 上市相关"
+    }
+]

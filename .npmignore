@@ -1,0 +1,6 @@
+public/
+node_modules/
+tests/
+.vscode/
+.git/
+api/
