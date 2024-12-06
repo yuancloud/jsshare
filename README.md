@@ -1,5 +1,5 @@
 # JsShare
-<img src="./images/treemap.gif" alt="demo" width="500" />
+<img src="./images/dapanyuntu.gif" alt="demo" width="500" />
 
 ## 介绍
 首先要特别感谢 FuShare 和 TuShare 在代码和项目开发上对本项目提供的借鉴和学习的机会!
@@ -57,3 +57,4 @@ http://localhost:3000/doc.html
 <img src="./images/docs.jpg" alt="demo" width="500" />
 
 #### 联系方式
+<img src="./images/wechat.pic.jpg" alt="wechat" width="500" />
