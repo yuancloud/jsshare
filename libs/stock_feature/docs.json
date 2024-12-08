@@ -1,4 +1,31 @@
-[
+[{
+        "name": "stock_getNewOneStockInfo_vip",
+        "doc": "vip游资买卖明细 \n:param date: 日期\n:param symbol: 股票代码"
+    },
+    {
+        "name": "stock_zt_pool_em",
+        "doc": "东方财富网-行情中心-涨停板行情-涨停股池\nhttps://quote.eastmoney.com/ztb/detail#type=ztgc\n:param date: 交易日\n:type date: str\n:return: 涨停股池"
+    },
+    {
+        "name": "stock_zt_pool_previous_em",
+        "doc": "东方财富网-行情中心-涨停板行情-昨日涨停股池\nhttps://quote.eastmoney.com/ztb/detail#type=zrzt\n:param date: 交易日\n:type date: str\n:return: 昨日涨停股池"
+    },
+    {
+        "name": "stock_zt_pool_strong_em",
+        "doc": "东方财富网-行情中心-涨停板行情-强势股池\nhttps://quote.eastmoney.com/ztb/detail#type=qsgc\n:param date: 交易日\n:type date: str\n:return: 强势股池"
+    },
+    {
+        "name": "stock_zt_pool_sub_new_em",
+        "doc": "东方财富网-行情中心-涨停板行情-次新股池\nhttps://quote.eastmoney.com/ztb/detail#type=cxgc\n:param date: 交易日\n:type date: str\n:return: 次新股池"
+    },
+    {
+        "name": "stock_zt_pool_zbgc_em",
+        "doc": "东方财富网-行情中心-涨停板行情-炸板股池\nhttps://quote.eastmoney.com/ztb/detail#type=zbgc\n:param date: 交易日\n:type date: str\n:return: 炸板股池"
+    },
+    {
+        "name": "stock_zt_pool_dtgc_em",
+        "doc": "东方财富网-行情中心-涨停板行情-跌停股池\nhttps://quote.eastmoney.com/ztb/detail#type=dtgc\n:param date: 交易日\n:type date: str\n:return: 跌停股池"
+    },
     {
         "name": "stock_a_below_net_asset_statistics",
         "doc": "破净股统计历史走势\nhttps://www.legulegu.com/stockdata/below-net-asset-statistics\n:param symbol: choice of {\"全部A股\", \"沪深300\", \"上证50\", \"中证500\"}\n:type symbol: str\n:return: 破净股统计历史走势"

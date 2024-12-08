@@ -28,25 +28,25 @@ async function stock_lhb_detail_em(start_date = "20230403", end_date = "20230417
         params.pageNumber = page.toString();
         let { data: { result: { data: temp_df } } } = await axios.get(url, { params });
         big_df = big_df.concat(temp_df.map(row => ({
-            '上榜日': dayjs(row.TRADE_DATE).format('YYYY-MM-DD'),
+            '上榜日': dayjs(row.TRADE_DATE).format('YYYYMMDD'),
             '股票代码': row.SECURITY_CODE,
             '股票简称': row.SECURITY_NAME_ABBR,
             '上榜原因': row.EXPLAIN,
-            '收盘价': parseFloat(row.CLOSE_PRICE),
-            '涨跌幅': parseFloat(row.CHANGE_RATE),
-            '龙虎榜净买额': parseFloat(row.BILLBOARD_NET_AMT),
-            '龙虎榜买入额': parseFloat(row.BILLBOARD_BUY_AMT),
-            '龙虎榜卖出额': parseFloat(row.BILLBOARD_SELL_AMT),
-            '龙虎榜成交额': parseFloat(row.BILLBOARD_DEAL_AMT),
-            '市场总成交额': parseFloat(row.ACCUM_AMOUNT),
-            '净买额占总成交比': parseFloat(row.DEAL_NET_RATIO),
-            '成交额占总成交比': parseFloat(row.DEAL_AMOUNT_RATIO),
-            '换手率': parseFloat(row.TURNOVERRATE),
-            '流通市值': parseFloat(row.FREE_MARKET_CAP),
-            '上榜后1日': parseFloat(row.D1_CLOSE_ADJCHRATE),
-            '上榜后2日': parseFloat(row.D2_CLOSE_ADJCHRATE),
-            '上榜后5日': parseFloat(row.D5_CLOSE_ADJCHRATE),
-            '上榜后10日': parseFloat(row.D10_CLOSE_ADJCHRATE)
+            '收盘价': row.CLOSE_PRICE,
+            '涨跌幅': row.CHANGE_RATE,
+            '龙虎榜净买额': row.BILLBOARD_NET_AMT,
+            '龙虎榜买入额': row.BILLBOARD_BUY_AMT,
+            '龙虎榜卖出额': row.BILLBOARD_SELL_AMT,
+            '龙虎榜成交额': row.BILLBOARD_DEAL_AMT,
+            '市场总成交额': row.ACCUM_AMOUNT,
+            '净买额占总成交比': row.DEAL_NET_RATIO,
+            '成交额占总成交比': row.DEAL_AMOUNT_RATIO,
+            '换手率': row.TURNOVERRATE,
+            '流通市值': row.FREE_MARKET_CAP,
+            '上榜后1日': row.D1_CLOSE_ADJCHRATE,
+            '上榜后2日': row.D2_CLOSE_ADJCHRATE,
+            '上榜后5日': row.D5_CLOSE_ADJCHRATE,
+            '上榜后10日': row.D10_CLOSE_ADJCHRATE
         }))
         );
     }
@@ -82,7 +82,7 @@ async function stock_lhb_stock_statistic_em(symbol = "近一月") {
         // 重命名列
         tempData = tempData.map(item => ({
             "代码": item.SECURITY_CODE,
-            "最近上榜日": item.LATEST_TDATE,
+            "最近上榜日": dayjs(item.LATEST_TDATE).format('YYYYMMDD'),
             "名称": item.SECURITY_NAME_ABBR,
             "近1个月涨跌幅": item.IPCT1M,
             "近3个月涨跌幅": item.IPCT3M,
@@ -140,25 +140,26 @@ async function stock_lhb_jgmmtj_em(start_date = "20240417", end_date = "20240430
             const temp_df = pageDataJson.result.data;
             big_df = big_df.concat(temp_df.map(item => ({
                 '代码': item.SECURITY_CODE,
-                '名称': item.SECURITY_NAME_ABBR,
-                '收盘价': parseFloat(item.CLOSE_PRICE),
-                '涨跌幅': parseFloat(item.CHANGE_RATE),
-                '买方机构数': parseInt(item.BUYER_COUNT),
-                '卖方机构数': parseInt(item.SELLER_COUNT),
-                '机构买入总额': parseFloat(item.BUY_AMT),
-                '机构卖出总额': parseFloat(item.SELL_AMT),
-                '机构买入净额': parseFloat(item.NET_BUY_AMT),
-                '市场总成交额': parseFloat(item.TOTAL_AMOUNT),
-                '机构净买额占总成交额比': parseFloat(item.NET_BUY_RATIO),
-                '换手率': parseFloat(item.TURNOVER_RATE),
-                '流通市值': parseFloat(item.FREE_MARKET_CAP),
-                '上榜原因': item.EXPLANATION,
-                '上榜日期': dayjs(item.TRADE_DATE).format('YYYY-MM-DD'),
-                'D1涨跌幅': parseFloat(item.D1_CLOSE_ADJCHRATE), // D1日涨跌幅
-                'D2涨跌幅': parseFloat(item.D2_CLOSE_ADJCHRATE), // D2日涨跌幅
-                'D3涨跌幅': parseFloat(item.D3_CLOSE_ADJCHRATE), // D3日涨跌幅
-                'D5涨跌幅': parseFloat(item.D5_CLOSE_ADJCHRATE), // D5日涨跌幅
-                'D10涨跌幅': parseFloat(item.D10_CLOSE_ADJCHRATE), // D10日涨跌幅
+                "名称": item.SECURITY_NAME_ABBR,
+                "代码": item.SECURITY_CODE,
+                "上榜日期": dayjs(item.TRADE_DATE).format('YYYYMMDD'),
+                "收盘价": item.CLOSE_PRICE,
+                "涨跌幅": item.CHANGE_RATE,
+                "买方机构数": item.BUY_TIMES,
+                "卖方机构数": item.SELL_TIMES,
+                "机构买入总额": item.BUY_AMT,
+                "机构卖出总额": item.SELL_AMT,
+                "机构买入净额": item.NET_BUY_AMT,
+                "市场总成交额": item.ACCUM_AMOUNT,
+                "机构净买额占总成交额比": item.RATIO,
+                "换手率": item.TURNOVERRATE,
+                "流通市值": item.FREECAP * 100000000,
+                "上榜原因": item.EXPLANATION,
+                // 'D1涨跌幅': (item.D1_CLOSE_ADJCHRATE), // D1日涨跌幅
+                // 'D2涨跌幅': (item.D2_CLOSE_ADJCHRATE), // D2日涨跌幅
+                // 'D3涨跌幅': (item.D3_CLOSE_ADJCHRATE), // D3日涨跌幅
+                // 'D5涨跌幅': (item.D5_CLOSE_ADJCHRATE), // D5日涨跌幅
+                // 'D10涨跌幅': (item.D10_CLOSE_ADJCHRATE), // D10日涨跌幅
             })));
         }
         return big_df;
@@ -201,19 +202,19 @@ async function stock_lhb_jgstatistic_em(symbol = "近一年") {
             big_df = big_df.concat(tempData.map(item => ({
                 代码: item.SECURITY_CODE,
                 名称: item.SECURITY_NAME_ABBR,
-                收盘价: parseFloat(item.CLOSE_PRICE),
-                涨跌幅: parseFloat(item.CHANGE_RATE),
-                龙虎榜成交金额: parseFloat(item.AMOUNT),
-                上榜次数: parseInt(item.ONLIST_TIMES),
-                机构买入额: parseFloat(item.BUY_AMT),
-                机构买入次数: parseInt(item.BUY_TIMES),
-                机构卖出额: parseFloat(item.SELL_AMT),
-                机构卖出次数: parseInt(item.SELL_TIMES),
-                机构净买额: parseFloat(item.NET_BUY_AMT),
-                近1个月涨跌幅: parseFloat(item.M1_CLOSE_ADJCHRATE),
-                近3个月涨跌幅: parseFloat(item.M3_CLOSE_ADJCHRATE),
-                近6个月涨跌幅: parseFloat(item.M6_CLOSE_ADJCHRATE),
-                近1年涨跌幅: parseFloat(item.Y1_CLOSE_ADJCHRATE),
+                收盘价: item.CLOSE_PRICE,
+                涨跌幅: item.CHANGE_RATE,
+                龙虎榜成交金额: item.AMOUNT,
+                上榜次数: item.ONLIST_TIMES,
+                机构买入额: item.BUY_AMT,
+                机构买入次数: item.BUY_TIMES,
+                机构卖出额: item.SELL_AMT,
+                机构卖出次数: item.SELL_TIMES,
+                机构净买额: item.NET_BUY_AMT,
+                近1个月涨跌幅: item.M1_CLOSE_ADJCHRATE,
+                近3个月涨跌幅: item.M3_CLOSE_ADJCHRATE,
+                近6个月涨跌幅: item.M6_CLOSE_ADJCHRATE,
+                近1年涨跌幅: item.Y1_CLOSE_ADJCHRATE,
                 统计周期: item.STATISTICSCYCLE, // 对应 STATISTICSCYCLE
                 所属板块: item.BOARD_NAME, // 对应 BOARD_NAME
                 板块代码: item.BOARD_CODE, // 对应 BOARD_CODE
@@ -251,12 +252,12 @@ async function stock_lhb_hyyyb_em(start_date = "20220324", end_date = "20220324"
             let { data: { result: { data: temp_df } } } = await axios.get(url, { params });
             big_df = big_df.concat(temp_df.map(row => ({
                 营业部名称: row.OPERATEDEPT_NAME, // 对应 OPERATEDEPT_NAME
-                上榜日: dayjs(row.ONLIST_DATE).format('YYYY-MM-DD'), // 对应 ONLIST_DATE，格式化为 'YYYY-MM-DD'
-                买入个股数: parseInt(row.BUYER_APPEAR_NUM), // 对应 BUYER_APPEAR_NUM
-                卖出个股数: parseInt(row.SELLER_APPEAR_NUM), // 对应 SELLER_APPEAR_NUM
-                买入总金额: parseFloat(row.TOTAL_BUYAMT), // 对应 TOTAL_BUYAMT
-                卖出总金额: parseFloat(row.TOTAL_SELLAMT), // 对应 TOTAL_SELLAMT
-                总买卖净额: parseFloat(row.TOTAL_NETAMT), // 对应 TOTAL_NETAMT
+                上榜日: dayjs(row.ONLIST_DATE).format('YYYYMMDD'), // 对应 ONLIST_DATE，格式化为 'YYYYMMDD'
+                买入个股数: (row.BUYER_APPEAR_NUM), // 对应 BUYER_APPEAR_NUM
+                卖出个股数: (row.SELLER_APPEAR_NUM), // 对应 SELLER_APPEAR_NUM
+                买入总金额: (row.TOTAL_BUYAMT), // 对应 TOTAL_BUYAMT
+                卖出总金额: (row.TOTAL_SELLAMT), // 对应 TOTAL_SELLAMT
+                总买卖净额: (row.TOTAL_NETAMT), // 对应 TOTAL_NETAMT
                 买入股票代码: row.BUY_STOCK, // 对应 BUY_STOCK
                 机构代码: row.OPERATEDEPT_CODE, // 对应 OPERATEDEPT_CODE
                 买入股票名称: row.SECURITY_NAME_ABBR, // 对应 SECURITY_NAME_ABBR
@@ -302,21 +303,21 @@ async function stock_lhb_yybph_em(symbol = "近一月") {
         bigData = bigData.concat(tempData.map((item, index) => ({
             序号: index + 1,
             营业部名称: item.OPERATEDEPT_NAME,
-            '上榜后1天-买入次数': parseFloat(item.TOTAL_BUYER_SALESTIMES_1DAY),
-            '上榜后1天-平均涨幅': parseFloat(item.AVERAGE_INCREASE_1DAY),
-            '上榜后1天-上涨概率': parseFloat(item.RISE_PROBABILITY_1DAY),
-            '上榜后2天-买入次数': parseFloat(item.TOTAL_BUYER_SALESTIMES_2DAY),
-            '上榜后2天-平均涨幅': parseFloat(item.AVERAGE_INCREASE_2DAY),
-            '上榜后2天-上涨概率': parseFloat(item.RISE_PROBABILITY_2DAY),
-            '上榜后3天-买入次数': parseFloat(item.TOTAL_BUYER_SALESTIMES_3DAY),
-            '上榜后3天-平均涨幅': parseFloat(item.AVERAGE_INCREASE_3DAY),
-            '上榜后3天-上涨概率': parseFloat(item.RISE_PROBABILITY_3DAY),
-            '上榜后5天-买入次数': parseFloat(item.TOTAL_BUYER_SALESTIMES_5DAY),
-            '上榜后5天-平均涨幅': parseFloat(item.AVERAGE_INCREASE_5DAY),
-            '上榜后5天-上涨概率': parseFloat(item.RISE_PROBABILITY_5DAY),
-            '上榜后10天-买入次数': parseFloat(item.TOTAL_BUYER_SALESTIMES_10DAY),
-            '上榜后10天-平均涨幅': parseFloat(item.AVERAGE_INCREASE_10DAY),
-            '上榜后10天-上涨概率': parseFloat(item.RISE_PROBABILITY_10DAY),
+            '上榜后1天-买入次数': (item.TOTAL_BUYER_SALESTIMES_1DAY),
+            '上榜后1天-平均涨幅': (item.AVERAGE_INCREASE_1DAY),
+            '上榜后1天-上涨概率': (item.RISE_PROBABILITY_1DAY),
+            '上榜后2天-买入次数': (item.TOTAL_BUYER_SALESTIMES_2DAY),
+            '上榜后2天-平均涨幅': (item.AVERAGE_INCREASE_2DAY),
+            '上榜后2天-上涨概率': (item.RISE_PROBABILITY_2DAY),
+            '上榜后3天-买入次数': (item.TOTAL_BUYER_SALESTIMES_3DAY),
+            '上榜后3天-平均涨幅': (item.AVERAGE_INCREASE_3DAY),
+            '上榜后3天-上涨概率': (item.RISE_PROBABILITY_3DAY),
+            '上榜后5天-买入次数': (item.TOTAL_BUYER_SALESTIMES_5DAY),
+            '上榜后5天-平均涨幅': (item.AVERAGE_INCREASE_5DAY),
+            '上榜后5天-上涨概率': (item.RISE_PROBABILITY_5DAY),
+            '上榜后10天-买入次数': (item.TOTAL_BUYER_SALESTIMES_10DAY),
+            '上榜后10天-平均涨幅': (item.AVERAGE_INCREASE_10DAY),
+            '上榜后10天-上涨概率': (item.RISE_PROBABILITY_10DAY),
         })));
     }
 
@@ -356,14 +357,13 @@ async function stock_lhb_traderstatistic_em(symbol = "近一月") {
             response = await axios.get(url, { params });
             const tempData = response.data.result.data;
             bigData = bigData.concat(tempData.map((item, index) => ({
-                序号: index + 1,
                 营业部名称: item.OPERATEDEPT_NAME,
-                龙虎榜成交金额: parseFloat(item.AMOUNT),
-                上榜次数: parseInt(item.SALES_ONLIST_TIMES),
-                买入额: parseFloat(item.ACT_BUY),
-                买入次数: parseInt(item.TOTAL_BUYER_SALESTIMES),
-                卖出额: parseFloat(item.ACT_SELL),
-                卖出次数: parseInt(item.TOTAL_SELLER_SALESTIMES)
+                龙虎榜成交金额: (item.AMOUNT),
+                上榜次数: (item.SALES_ONLIST_TIMES),
+                买入额: (item.ACT_BUY),
+                买入次数: (item.TOTAL_BUYER_SALESTIMES),
+                卖出额: (item.ACT_SELL),
+                卖出次数: (item.TOTAL_SELLER_SALESTIMES)
             })));
         }
         return bigData;
@@ -400,9 +400,8 @@ async function stock_lhb_stock_detail_date_em(symbol = "600077") {
 
         // 处理数据
         let tempData = data.map((item, index) => ({
-            序号: index + 1,
             股票代码: item.SECURITY_CODE,
-            交易日: dayjs(item.TRADE_DATE).format('YYYY-MM-DD')
+            交易日: dayjs(item.TRADE_DATE).format('YYYYMMDD')
         }));
 
         return tempData;
@@ -444,23 +443,23 @@ async function stock_lhb_stock_detail_em(symbol = "000788", date = "20220315", f
 
         tempData = tempData.map(item => ({
             股票代码: item.SECURITY_CODE, // 对应 SECURITY_CODE
-            交易日期: dayjs(item.TRADE_DATE).format('YYYY-MM-DD'), // 对应 TRADE_DATE，格式化为 'YYYY-MM-DD'
+            交易日期: dayjs(item.TRADE_DATE).format('YYYYMMDD'), // 对应 TRADE_DATE，格式化为 'YYYYMMDD'
             SECU代码: item.SECUCODE, // 对应 SECUCODE
             机构代码: item.OPERATEDEPT_CODE, // 对应 OPERATEDEPT_CODE
             机构名称: item.OPERATEDEPT_NAME, // 对应 OPERATEDEPT_NAME
             上榜原因: item.EXPLANATION, // 对应 EXPLANATION
-            涨跌幅: parseFloat(item.CHANGE_RATE), // 对应 CHANGE_RATE
-            收盘价: parseFloat(item.CLOSE_PRICE), // 对应 CLOSE_PRICE
-            累计成交金额: parseFloat(item.ACCUM_AMOUNT), // 对应 ACCUM_AMOUNT
-            累计成交量: parseFloat(item.ACCUM_VOLUME), // 对应 ACCUM_VOLUME
-            买入金额: parseFloat(item.BUY), // 对应 BUY
-            卖出金额: parseFloat(item.SELL), // 对应 SELL
-            净买金额: parseFloat(item.NET), // 对应 NET
-            "3日上涨概率": parseFloat(item.RISE_PROBABILITY_3DAY), // 对应 RISE_PROBABILITY_3DAY
+            涨跌幅: (item.CHANGE_RATE), // 对应 CHANGE_RATE
+            收盘价: (item.CLOSE_PRICE), // 对应 CLOSE_PRICE
+            累计成交金额: (item.ACCUM_AMOUNT), // 对应 ACCUM_AMOUNT
+            累计成交量: (item.ACCUM_VOLUME), // 对应 ACCUM_VOLUME
+            买入金额: (item.BUY), // 对应 BUY
+            卖出金额: (item.SELL), // 对应 SELL
+            净买金额: (item.NET), // 对应 NET
+            "3日上涨概率": (item.RISE_PROBABILITY_3DAY), // 对应 RISE_PROBABILITY_3DAY
             "3日买入营业次数": parseInt(item.TOTAL_BUYER_SALESTIMES_3DAY), // 对应 TOTAL_BUYER_SALESTIMES_3DAY
             涨跌类型: item.CHANGE_TYPE, // 对应 CHANGE_TYPE
-            买入比例: parseFloat(item.TOTAL_BUYRIO), // 对应 TOTAL_BUYRIO
-            卖出比例: parseFloat(item.TOTAL_SELLRIO), // 对应 TOTAL_SELLRIO
+            买入比例: (item.TOTAL_BUYRIO), // 对应 TOTAL_BUYRIO
+            卖出比例: (item.TOTAL_SELLRIO), // 对应 TOTAL_SELLRIO
             交易ID: item.TRADE_ID // 对应 TRADE_ID
         }));
 

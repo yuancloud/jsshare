@@ -1,5 +1,4 @@
 const axios = require('axios');
-const dayjs = require('dayjs');
 const _ = require('lodash');
 const util = require('../util/util');
 ///东方财富网-沪深京 A 股-实时行情
@@ -45,7 +44,7 @@ async function stock_zh_a_spot_em() {
       "市净率": record.f23,
       "60日涨跌幅": record.f24,
       "年初至今涨跌幅": record.f25,
-    }))
+    })).filter(f => !!f['最新价'] || f['最新价'] == '-')
 
     return result;
   } catch (error) {
@@ -436,7 +435,7 @@ async function stock_zh_a_hist(symbol = "000001", period = "daily", start_date =
   };
 
   try {
-    const response = await axios.get(url, { params, timeout });
+    const response = await axios.get(url, { params });
     const records = response.data?.data.klines;
     // 设置列名
     let tempData = records.map(record => {
@@ -941,7 +940,7 @@ async function stock_kline(
     ut: '7eea3edcaed734bea9cbfc24409ed989',
     klt: period,
     fqt: adjust,
-    secid: `${market ? market : util.get_market_number(symbol)}.${symbol}`,
+    secid: `${market != null ? market : util.get_market_number(symbol)}.${symbol}`,
     beg: start_date,
     end: end_date,
     _: '1630930917857',

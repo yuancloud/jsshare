@@ -23,7 +23,7 @@ async function stock_a_below_net_asset_statistics(symbol = "全部A股") {
     try {
         const response = await axios.get(url, { params });
         let result = response.data.map(row => {
-            row.date = dayjs(row.date).format("YYYY-MM-DD");
+            row.date = dayjs(row.date).format("YYYYMMDD");
             delete row.marketId
             return row
         });

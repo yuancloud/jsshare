@@ -1,0 +1,30 @@
+[
+    {
+        "name": "get_zh_index_page_count",
+        "doc": "指数的总页数\nhttps://vip.stock.finance.sina.com.cn/mkt/#hs_s\n:return: 需要抓取的指数的总页数\n:rtype: int"
+    },
+    {
+        "name": "stock_zh_index_spot_sina",
+        "doc": "新浪财经-行情中心首页-A股-分类-所有指数\n大量采集会被目标网站服务器封禁 IP, 如果被封禁 IP, 请 10 分钟后再试\nhttps://vip.stock.finance.sina.com.cn/mkt/#hs_s\n:return: 所有指数的实时行情数据"
+    },
+    {
+        "name": "stock_zh_index_spot_em",
+        "doc": "东方财富网-行情中心-沪深京指数\nhttps://quote.eastmoney.com/center/gridlist.html#index_sz\n:param symbol: \"上证系列指数\"; choice of {\"上证系列指数\", \"深证系列指数\", \"指数成份\", \"中证系列指数\"}\n:type symbol: str\n:return: 指数的实时行情数据"
+    },
+    {
+        "name": "stock_zh_index_daily",
+        "doc": "新浪财经-指数-历史行情数据, 大量抓取容易封 IP\nhttps://finance.sina.com.cn/realstock/company/sh000909/nc.shtml\n:param symbol: sz399998, 指定指数代码\n:type symbol: str\n:return: 历史行情数据"
+    },
+    {
+        "name": "get_tx_start_year",
+        "doc": "腾讯证券-获取所有股票数据的第一天, 注意这个数据是腾讯证券的历史数据第一天\nhttps://gu.qq.com/sh000919/zs\n:param symbol: 带市场标识的股票代码\n:type symbol: str\n:return: 开始日期"
+    },
+    {
+        "name": "stock_zh_index_daily_tx",
+        "doc": "腾讯证券-日频-股票或者指数历史数据\n作为 ak.stock_zh_index_daily() 的补充, 因为在新浪中有部分指数数据缺失\n注意都是: 前复权, 不同网站复权方式不同, 不可混用数据\nhttps://gu.qq.com/sh000919/zs\n:param symbol: 带市场标识的股票或者指数代码\n:type symbol: str\n:return: 前复权的股票和指数数据"
+    },
+    {
+        "name": "stock_zh_index_daily_em",
+        "doc": "东方财富网-股票指数数据\nhttps://quote.eastmoney.com/center/hszs.html\n:param symbol: 带市场标识的指数代码; sz: 深交所, sh: 上交所, csi: 中信指数 + id(000905)\n:type symbol: str\n:param start_date: 开始时间\n:type start_date: str\n:param end_date: 结束时间\n:type end_date: str\n:return: 指数数据"
+    }
+]

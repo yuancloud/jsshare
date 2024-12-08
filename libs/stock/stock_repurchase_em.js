@@ -40,13 +40,13 @@ async function stock_repurchase_em() {
             '占公告前一日总股本比例-上限': item.ZSZSX,
             '计划回购金额区间-下限': item.JEXX,
             '计划回购金额区间-上限': item.JESX,
-            '回购起始时间': item.DIM_TRADEDATE,
+            '回购起始时间': dayjs(item.DIM_TRADEDATE).format('YYYYMMDD'),
             '实施进度': item.REPURPROGRESS,
             '已回购股份价格区间-下限': item.REPURPRICELOWER1,
             '已回购股份价格区间-上限': item.REPURPRICECAP1,
             '已回购股份数量': item.REPURNUM,
             '已回购金额': item.REPURAMOUNT,
-            '最新公告日期': item.UPDATEDATE
+            '最新公告日期': dayjs(item.UPDATEDATE).format('YYYYMMDD')
         }));
 
 

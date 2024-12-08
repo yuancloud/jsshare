@@ -31,7 +31,7 @@ async function stock_individual_info_em(symbol = "603777") {
             "行业": row.f127,
             "总市值": row.f116,
             "流通市值": row.f117,
-            "上市时间": row.f189
+            "上市时间": row.f189.toString()
 
         }
         return result;

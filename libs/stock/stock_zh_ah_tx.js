@@ -145,7 +145,7 @@ async function stock_zh_ah_daily(symbol = "02318", startYear = "2019", endYear =
                 tempData = dataJson.data[`hk${symbol}`][`${adjust}day`];
             }
             let result = tempData.map(row => ({
-                "日期": row[0],
+                "日期": row[0]?.replace(/-/g, ''),
                 "开盘": parseFloat(row[1]),
                 "收盘": parseFloat(row[2]),
                 "最高": parseFloat(row[3]),

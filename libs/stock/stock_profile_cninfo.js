@@ -43,7 +43,7 @@ async function stock_profile_cninfo(symbol = "600030") {
             "所属行业": record.F032V,
             "法人代表": record.F003V,
             "注册资金": record.F007N,
-            "成立日期": record.F010D,
+            "成立日期": record.F010D?.replace(/-/g, ''),
             "上市日期": record.F006D,
             "官方网站": record.F011V,
             "电子邮箱": record.F012V,

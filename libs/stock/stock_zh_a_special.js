@@ -70,7 +70,6 @@ async function stock_zh_a_new_em() {
         const response = await axios.get(url, { params });
         const records = response.data?.data.diff;
         let result = records.map((item, index) => ({
-            序号: index + 1,
             最新价: item.f2,
             涨跌幅: item.f3,
             涨跌额: item.f4,
@@ -169,7 +168,7 @@ async function stock_zh_a_new() {
             const dataJson = JSON.parse(responseData.data.replace(/\'/g, '"'));
             bigArray = bigArray.concat(dataJson);
         }
-        let result = bigArray.forEach((item, index) => {
+         bigArray.forEach((item, index) => {
             item.buy = parseFloat(item.buy);
             item.sell = parseFloat(item.sell);
             item.high = parseFloat(item.high);
@@ -178,7 +177,7 @@ async function stock_zh_a_new() {
             item.settlement = parseFloat(item.settlement);
             item.trade = parseFloat(item.trade);
         })
-        return result;
+        return bigArray;
     } catch (error) {
         console.error("Error fetching or processing data:", error);
         throw error;

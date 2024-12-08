@@ -32,7 +32,7 @@ async function stock_cg_equity_mortgage_cninfo(date = "20210930") {
         const tempDf = dataJson.records.map(record => ({
             '质押解除数量': record.F012N ?? -1,
             '股票简称': record.SECNAME,
-            '公告日期': record.DECLAREDATE,
+            '公告日期': record.DECLAREDATE?.replace(/-/g, ''),
             '质押事项': record.F008V,
             '质权人': record.F003V,
             '出质人': record.F001V,

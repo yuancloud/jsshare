@@ -61,7 +61,7 @@ async function stock_hold_management_detail_cninfo(symbol = "增持") {
         "增持": "B",
         "减持": "S",
     };
-    const currentDate = dayjs().format('YYYY-MM-DD');
+    const currentDate = dayjs().format('YYYYMMDD');
     const url = "https://webapi.cninfo.com.cn/api/sysapi/p_sysapi1030";
 
 
@@ -92,14 +92,14 @@ async function stock_hold_management_detail_cninfo(symbol = "增持") {
         const records = response.data.records;
         let result = records.map(record => ({
             "证券简称": record.SECNAME,
-            "公告日期": record.DECLAREDATE,
+            "公告日期": record.DECLAREDATE?.replace(/-/g, ''),
             "高管姓名": record.HUMANNAME,
             "期末市值": record.F009N,
             "成交均价": record.F008N,
             "证券代码": record.SECCODE,
             "变动比例": record.F007N,
             "变动数量": record.F006N,
-            "截止日期": record.ENDDATE,
+            "截止日期": record.ENDDATE?.replace(/-/g, ''),
             "期末持股数量": record.F005N,
             "期初持股数量": record.F004N,
             "变动人与董监高关系": record.F003V,

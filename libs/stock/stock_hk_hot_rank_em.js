@@ -66,7 +66,7 @@ async function stock_hk_hot_rank_detail_em(symbol = "00700") {
         const response = await axios.post(url_rank, payload);
         const records = response.data?.data;
         let result = records.map(item => ({
-            时间: item.calcTime,
+            日期: item.calcTime?.replace(/-/g, ''),
             排名: item.rank,
             证券代码: symbol
         }));
@@ -124,6 +124,7 @@ async function stock_hk_hot_rank_latest_em(symbol = "00700") {
     try {
         const response = await axios.post(url, payload);
         const result = response.data?.data;
+        
         return result;
     } catch (error) {
         console.error("Error fetching data:", error);

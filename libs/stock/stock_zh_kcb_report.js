@@ -57,7 +57,7 @@ async function stock_zh_kcb_report_em(from_page = 1, to_page = 100) {
                 名称: item.codes[0].short_name,
                 公告标题: item.title,
                 公告类型: item.columns[0].column_name,
-                公告日期: dayjs(item.notice_date).format('YYYY-MM-DD'),
+                公告日期: dayjs(item.notice_date).format('YYYYMMDD'),
                 公告代码: item.art_code
             })
             );

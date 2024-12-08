@@ -28,6 +28,8 @@ function load_path(libsDir) {
     }
 }
 load_path(path.join(__dirname, './libs/stock'));
+load_path(path.join(__dirname, './libs/index'));
+load_path(path.join(__dirname, './libs/tool'));
 load_path(path.join(__dirname, './libs/stock_feature'));
 
 module.exports = functions;

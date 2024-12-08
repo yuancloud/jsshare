@@ -59,7 +59,7 @@ async function stock_a_indicator_lg(symbol = "000001") {
         return temp_df;
     } else {
         const url = "https://legulegu.com/api/s/base-info/";
-        const token = md5(dayjs().format('YYYY-MM-DD')).toString(); // 假设get_token_lg()函数已经定义
+        const token = md5(dayjs().format('YYYYMMDD')).toString(); // 假设get_token_lg()函数已经定义
         const params = new URLSearchParams({ token, id: symbol });
         let headers_csrf = await get_cookie_csrf("https://legulegu.com/")
         const response = await axios.post(url, params, {
@@ -80,7 +80,7 @@ async function stock_a_indicator_lg(symbol = "000001") {
 
         temp_df = temp_df.map(item => ({
             ...item,
-            trade_date: dayjs(item.trade_date).format('YYYY-MM-DD')
+            trade_date: dayjs(item.trade_date).format('YYYYMMDD')
         }));
 
         for (let key of Object.keys(temp_df[0])) {

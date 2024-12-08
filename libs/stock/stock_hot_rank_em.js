@@ -1,5 +1,5 @@
 const axios = require('axios');
-
+const dayjs = require('dayjs');
 ///东方财富-个股人气榜-人气榜
 async function stock_hot_rank_em() {
     const url = "https://emappdata.eastmoney.com/stockrank/getAllCurrentList";
@@ -65,7 +65,7 @@ async function stock_hot_rank_detail_em(symbol = "SZ000665") {
         const followResponse = await axios.post(urlFollow, payload);
         let records_follow = followResponse.data.data;
         let result = rankResponse.data.data.map(item => ({
-            时间: item.calcTime,
+            时间: item.calcTime?.replace(/-/g, ''),
             排名: item.rank,
             证券代码: symbol,
             新晋粉丝: parseFloat(parseFloat(records_follow.find(f => f.calcTime.startsWith(item.calcTime)).newUidRate.replace("%", "") / 100).toFixed(4)),
@@ -124,7 +124,7 @@ async function stock_hot_keyword_em(symbol = "SZ000665") {
         const response = await axios.post(url, payload);
         const records = response.data?.data;
         const tempArray = records.map(item => ({
-            时间: item.calcTime.split(" ")[0],
+            时间: dayjs(item.calcTime).format("YYYYMMDD"),
             股票代码: item.srcSecurityCode,
             概念名称: item.conceptName,
             概念代码: item.conceptId,
@@ -180,7 +180,7 @@ async function stock_hot_rank_relate_em(symbol = "SZ000665") {
         const response = await axios.post(url, payload);
         const records = response.data?.data;
         let result = records.map(item => ({
-            时间: item.calcTime.split(" ")[0],
+            时间: dayjs(item.calcTime).format('YYYYMMDD'),
             股票代码: item.innerCode,
             相关股票代码: item.followSrcSecurityCode,
             涨跌幅: parseFloat(item.rate.replace('%', ''))

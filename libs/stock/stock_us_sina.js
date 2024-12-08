@@ -616,7 +616,7 @@ async function stock_us_daily(symbol = "FB", adjust = "qfq") {
     let qfqFactorData = JSON.parse(res2.data.split('=')[1].split('\n')[0]).data;
     qfqFactorData = _.map(qfqFactorData, item => ({
         adjust: item.c,
-        date: dayjs(item.d).toDate(),
+        date: dayjs(item.d).format('YYYYMMDD'),
         qfq_factor: item.f
     }));
     // 根据adjust参数返回不同的结果

@@ -20,19 +20,19 @@ async function stock_hk_fhpx_detail_ths(symbol = "0700") {
         const response = await axios.get(url, { headers });
         const $ = cheerio.load(response.data);
         const temp_df = [];
-        $('table').first().find('tr').each((index, element) => {
+        $('table>tbody').first().find('tr').each((index, element) => {
             if (index > 0) { // 跳过表头
-                const tds = $(element).find('td');
+                const tds = $(element).children();
                 temp_df.push({
-                    '公告日期': $(tds[0]).text(),
+                    '公告日期': ($(tds[0]).text())?.replace(/-/g, ''),
                     '方案': $(tds[1]).text(),
-                    '除净日': $(tds[2]).text(),
-                    '派息日': $(tds[3]).text(),
-                    '过户日期起止日-起始': $(tds[4]).text(),
-                    '过户日期起止日-截止': $(tds[5]).text(),
+                    '除净日': $(tds[2]).text() == '--' ? "" : $(tds[2]).text()?.replace(/-/g, ''),
+                    '派息日': $(tds[3]).text() == '--' ? "" : $(tds[3]).text()?.replace(/-/g, ''),
+                    '过户日期起止日-起始': $(tds[4]).text() == '--' ? "" : $(tds[4]).text()?.replace(/-/g, ''),
+                    '过户日期起止日-截止': $(tds[5]).text() == '--' ? "" : $(tds[5]).text()?.replace(/-/g, ''),
                     '类型': $(tds[6]).text(),
                     '进度': $(tds[7]).text(),
-                    '以股代息': $(tds[8]).text()
+                    '以股代息': $(tds[8]).text()?.replace(/\t/g, '')?.replace(/\n/g, ''),
                 });
             }
         });

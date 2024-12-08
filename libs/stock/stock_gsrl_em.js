@@ -33,7 +33,7 @@ async function stock_gsrl_gsdt_em(date = "20230808") {
             简称: item.SECURITY_NAME_ABBR,
             事件类型: item.EVENT_TYPE,
             具体事项: item.EVENT_CONTENT,
-            交易日: dayjs(item.TRADE_DATE).format('YYYY-MM-DD')
+            交易日: dayjs(item.TRADE_DATE).format('YYYYMMDD')
         }));
 
         return results;

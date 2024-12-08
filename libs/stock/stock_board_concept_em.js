@@ -26,7 +26,6 @@ async function stock_board_concept_name_em() {
 
         // Transform the data
         const tempDf = tempData.map((item, index) => ({
-            排名: index + 1,
             最新价: (item.f2),
             涨跌幅: (item.f3),
             涨跌额: (item.f4),
@@ -83,7 +82,7 @@ async function stock_board_concept_hist_em(
         const dataJson = response.data;
         const tempData = dataJson.data.klines.map(item => item.split(','));
         const tempDf = tempData.map(row => ({
-            日期: row[0],
+            日期: util.parseDate(row[0]).fstr(),
             开盘: parseFloat(row[1]),
             收盘: parseFloat(row[2]),
             最高: parseFloat(row[3]),
@@ -198,7 +197,6 @@ async function stock_board_concept_cons_em(symbol = "长寿药") {
         const response = await axios.get(url, { params });
         const dataJson = response.data;
         let tempDf = dataJson.data.diff.map((item, index) => ({
-            序号: index + 1,
             最新价: parseFloat(item.f2),
             涨跌幅: parseFloat(item.f3),
             涨跌额: parseFloat(item.f4),

@@ -86,7 +86,7 @@ async function stock_industry_change_cninfo(symbol = "002594", startDate = "2009
             机构名称: row["ORGNAME"],
             证券代码: row["SECCODE"],
             新证券简称: row["SECNAME"],
-            变更日期: row["VARYDATE"],
+            变更日期: row["VARYDATE"]?.replace(/-/g, ''),
             分类标准编码: row["F001V"],
             分类标准: row["F002V"],
             行业编码: row["F003V"],

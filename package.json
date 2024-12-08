@@ -1,6 +1,6 @@
 {
   "name": "@jsshare/jsshare",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "description": "JsShare 的特点是获取的是相对权威的财经数据网站公布的原始数据，通过利用原始数据进行各数据源之间的交叉验证，进而再加工，从而得出科学的结论。",
   "scripts": {

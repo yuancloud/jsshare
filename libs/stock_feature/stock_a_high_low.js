@@ -19,7 +19,7 @@ async function stock_a_high_low_statistics(symbol = "all") {
 
         // 将原始数据转换为适当的格式
         let tempData = dataJson.map(item => ({
-            date: dayjs(item.date).format('YYYY-MM-DD'),
+            date: dayjs(item.date).format('YYYYMMDD'),
             close: parseFloat(item.close),
             high20: parseFloat(item.high20),
             low20: parseFloat(item.low20),

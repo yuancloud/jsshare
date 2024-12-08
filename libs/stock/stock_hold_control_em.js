@@ -43,7 +43,7 @@ async function stock_hold_management_detail_em() {
             股票代码: row.SECURITY_CODE,  // 股票代码
             衍生代码: row.DERIVE_SECURITY_CODE,  // 衍生证券代码（如果存在）
             股票名称: row.SECURITY_NAME,  // 股票名称
-            变动日期: row.CHANGE_DATE,  // 变动日期
+            变动日期: row.CHANGE_DATE?.replace(/-/g, ''),  // 变动日期
             变动人: row.PERSON_NAME,  // 变动人
             变动股数: row.CHANGE_SHARES,  // 变动股数
             成交均价: row.AVERAGE_PRICE,  // 成交均价
@@ -99,7 +99,7 @@ async function stock_hold_management_person_em(symbol = "001308", name = "吴远
             代码: row.SECURITY_CODE,  // 股票代码
             衍生代码: row.DERIVE_SECURITY_CODE,  // 衍生证券代码（如果存在）
             名称: row.SECURITY_NAME,  // 股票名称
-            日期: row.CHANGE_DATE,  // 变动日期
+            日期: row.CHANGE_DATE?.replace(/-/g, ''),  // 变动日期
             变动人: row.PERSON_NAME,  // 变动人
             变动股数: row.CHANGE_SHARES,  // 变动股数
             成交均价: row.AVERAGE_PRICE,  // 成交均价

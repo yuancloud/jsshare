@@ -30,6 +30,7 @@ async function stock_info_sz_name_code(symbol = "A股列表") {
             item['A股流通股本'] = parseInt(item['A股流通股本'].replace(/,/g, ''));
             item['B股总股本'] = parseInt(item['B股总股本'].replace(/,/g, ''));
             item['B股流通股本'] = parseInt(item['B股流通股本'].replace(/,/g, ''));
+            item['A股上市日期'] = item['A股上市日期']?.replace(/-/g, '')
         })
         return tempData;
     } catch (error) {
@@ -77,13 +78,13 @@ async function stock_info_sh_name_code(symbol = "主板A股") {
             "公司简称（英文）": item.COMPANY_ABBR_EN,
             "上市板块": item.LIST_BOARD,
             "公司简称": item.COMPANY_ABBR,
-            "退市日期": item.DELIST_DATE == '-' ? "" : item.DELIST_DATE,
+            "退市日期": item.DELIST_DATE == '-' ? "" : item.DELIST_DATE?.replace(/-/g, ''),
             "编号": item.NUM,
             "证券名称（中文）": item.SEC_NAME_CN,
             "公司全称（英文）": item.FULL_NAME_IN_ENGLISH,
             "证券全称": item.SEC_NAME_FULL,
             "B股代码": item.B_STOCK_CODE == "-" ? "" : item.B_STOCK_CODE,
-            "上市日期": item.LIST_DATE,
+            "上市日期": item.LIST_DATE?.replace(/-/g, ''),
             "产品状态": item.PRODUCT_STATUS,
             "公司代码": item.COMPANY_CODE,
             "公司全称": item.FULL_NAME
@@ -133,17 +134,10 @@ async function stock_info_bj_name_code() {
             "证券简称": row[41],
             "总股本": row[36],
             "流通股本": row[10],
-            "上市日期": row[0],
+            "上市日期": row[0]?.replace(/-/g, ''),
             "所属行业": row[16],
             "地区": row[26],
-            "报告日期": row[21]
-        }));
-
-        // 转换日期格式
-        bigDf = bigDf.map(row => ({
-            ...row,
-            "报告日期": dayjs(row["报告日期"], 'YYYY-MM-DD', true).toDate(),
-            "上市日期": dayjs(row["上市日期"], 'YYYY-MM-DD', true).toDate()
+            "报告日期": row[21]?.replace(/-/g, '')
         }));
 
         return bigDf;
@@ -200,11 +194,11 @@ async function stock_info_sh_delist(symbol = "全部") {
             "暂停上市日期": dayjs(item.DELIST_DATE).toDate()
         }));
 
-        // 将日期转换为YYYY-MM-DD格式
+        // 将日期转换为YYYYMMDD格式
         tempData = tempData.map(item => ({
             ...item,
-            "上市日期": dayjs(item["上市日期"]).format("YYYY-MM-DD"),
-            "暂停上市日期": dayjs(item["暂停上市日期"]).format("YYYY-MM-DD")
+            "上市日期": dayjs(item["上市日期"]).format("YYYYMMDD"),
+            "暂停上市日期": dayjs(item["暂停上市日期"]).format("YYYYMMDD")
         }));
 
         return tempData;
@@ -246,8 +240,8 @@ async function stock_info_sz_delist(symbol = "暂停上市公司") {
             return {
                 ...item,
                 '证券代码': _.padStart(item['证券代码'].toString(), 6, '0'),
-                '上市日期': dayjs(item['上市日期']).format('YYYY-MM-DD'),
-                '终止上市日期': dayjs(item['终止上市日期']).format('YYYY-MM-DD')
+                '上市日期': dayjs(item['上市日期']).format('YYYYMMDD'),
+                '终止上市日期': dayjs(item['终止上市日期']).format('YYYYMMDD')
             };
         });
 

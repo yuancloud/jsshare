@@ -40,7 +40,7 @@ async function stock_industry_pe_ratio_cninfo(symbol = "证监会行业分类", 
             "行业分类": record.F003V,
             "总市值-静态": record.F009N,
             "纳入计算公司数量": record.F008N,
-            "变动日期": record.VARYDATE,
+            "变动日期": record.VARYDATE?.replace(/-/g, ''),
             "公司数量": record.F007N,
         }));
 

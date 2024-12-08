@@ -46,7 +46,7 @@ async function stock_price_js(symbol = "us") {
             "最新目标价": record.latest_target_price,
             "先前目标价": record.previous_target_price,
             "机构名称": record.institution,
-            "日期": record.pub_time,
+            "日期": dayjs(record.pub_time).format('YYYYMMDD'),
             // "_": record.status,
             "个股名称": record.name,
             // "_": record.us,

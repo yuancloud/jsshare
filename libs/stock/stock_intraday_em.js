@@ -1,62 +1,8 @@
 const axios = require('axios');
 const util = require('../util/util.js');
-const dayjs = require('dayjs');
 const _ = require('lodash');
-///东方财富-股票和市场代码
+const { Readable } = require('stream');
 
-async function __code_id_map_em() {
-  /**
-   * 东方财富-股票和市场代码
-   * https://quote.eastmoney.com/center/gridlist.html#hs_a_board
-   * @return {Object} 股票和市场代码
-   */
-  const url = "http://80.push2.eastmoney.com/api/qt/clist/get";
-  const params = new URLSearchParams({
-    "pn": "1",
-    "pz": "50000",
-    "po": "1",
-    "np": "1",
-    "ut": "bd1d9ddb04089700cf9c27f6f7426281",
-    "fltt": "2",
-    "invt": "2",
-    "fid": "f3",
-    "fs": "m:1 t:2,m:1 t:23",
-    "fields": "f12",
-    "_": "1623833739532"
-  });
-
-  try {
-    const response = await axios.get(url, { params });
-    const data_json = response.data;
-    if (!data_json.data.diff) return {};
-
-    let temp_df = data_json.data.diff.map(item => ({ sh_code: item.f12, sh_id: 1 }));
-    let code_id_dict = temp_df.reduce((acc, item) => (acc[item.sh_code] = item.sh_id, acc), {});
-
-    // 对于深证市场的请求
-    params.set("fs", "m:0 t:6,m:0 t:80");
-    const response_sz = await axios.get(url, { params });
-    const data_json_sz = response_sz.data;
-    if (data_json_sz.data.diff) {
-      let temp_df_sz = data_json_sz.data.diff.map(item => ({ f12: item.f12, sz_id: 0 }));
-      temp_df_sz.forEach(item => code_id_dict[item.f12] = item.sz_id);
-    }
-
-    // 对于北京市场的请求
-    params.set("fs", "m:0 t:81 s:2048");
-    const response_bj = await axios.get(url, { params });
-    const data_json_bj = response_bj.data;
-    if (data_json_bj.data.diff) {
-      let temp_df_bj = data_json_bj.data.diff.map(item => ({ f12: item.f12, bj_id: 0 }));
-      temp_df_bj.forEach(item => code_id_dict[item.f12] = item.bj_id);
-    }
-
-    return code_id_dict;
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
-}
 /**
  * 东财财富-分时数据
  * https://quote.eastmoney.com/f1.html?newcode=0.000001
@@ -122,7 +68,7 @@ async function stock_intraday_em(symbol = '000001') {
   let result = records.map(row => {
     let items = row.split(',')
     return {
-      时间: items[0],
+      时间: items[0]?.replace(/:/g, ''),
       成交价: parseFloat(items[1]) || null,
       手数: parseInt(items[2]) || null,
       买卖盘性质: {

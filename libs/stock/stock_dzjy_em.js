@@ -32,7 +32,7 @@ async function stock_dzjy_sctj() {
         // 处理数据
         let bigDf = bigData.map((item, index) => ({
             序号: index + 1,
-            交易日期: dayjs(item.TRADE_DATE).format('YYYY-MM-DD'),
+            交易日期: dayjs(item.TRADE_DATE).format('YYYYMMDD'),
             上证指数: parseFloat(item.SZ_INDEX),
             上证指数涨跌幅: (item.SZ_CHANGE_RATE),
             大宗交易成交总额: (item.BLOCKTRADE_DEAL_AMT),
@@ -85,7 +85,7 @@ async function stock_dzjy_mrmx(symbol = 'A股', start_date = '20220104', end_dat
         if (symbol === 'A股') {
             temp_df = temp_df.map(item => ({
                 "序号": item.index,
-                "交易日期": dayjs(item.TRADE_DATE).format('YYYY-MM-DD'),
+                "交易日期": dayjs(item.TRADE_DATE).format('YYYYMMDD'),
                 "证券代码": item.SECURITY_CODE,
                 "证券简称": item.SECURITY_NAME_ABBR,
                 "涨跌幅": (item.CHANGE_RATE),
@@ -101,7 +101,7 @@ async function stock_dzjy_mrmx(symbol = 'A股', start_date = '20220104', end_dat
         } else if (['B股', '基金', '债券'].includes(symbol)) {
             temp_df = temp_df.map(item => ({
                 "序号": item.index,
-                "交易日期": dayjs(item.TRADE_DATE).format('YYYY-MM-DD'),
+                "交易日期": dayjs(item.TRADE_DATE).format('YYYYMMDD'),
                 "证券代码": item.SECURITY_CODE,
                 "证券简称": item.SECURITY_NAME_ABBR,
                 "成交价": (item.DEAL_PRICE),
@@ -141,7 +141,7 @@ async function stock_dzjy_mrtj(start_date = '20220105', end_date = '20220105') {
         // 构建DataFrame类似的结构
         const temp_df = data.map((item, index) => ({
             序号: index + 1,
-            交易日期: dayjs(item.TRADE_DATE).format('YYYY-MM-DD'),
+            交易日期: dayjs(item.TRADE_DATE).format('YYYYMMDD'),
             证券代码: item.SECURITY_CODE,
             证券简称: item.SECURITY_NAME_ABBR,
             涨跌幅: (item.CHANGE_RATE),
@@ -206,7 +206,7 @@ async function stock_dzjy_hygtj(symbol = '近三月') {
         证券简称: item.SECURITY_NAME_ABBR,
         最新价: parseFloat(item.CLOSE_PRICE),
         涨跌幅: parseFloat(item.CHANGE_RATE),
-        最近上榜日: dayjs(item.TRADE_DATE).format('YYYY-MM-DD'),
+        最近上榜日: dayjs(item.TRADE_DATE).format('YYYYMMDD'),
         上榜次数总计: parseInt(item.DEAL_NUM),
         上榜次数溢价: parseInt(item.PREMIUM_TIMES),
         上榜次数折价: parseInt(item.DISCOUNT_TIMES),
@@ -262,7 +262,7 @@ async function stock_dzjy_hyyybtj(symbol = '近3日') {
             序号: index + 1,
             营业部代码: row.OPERATEDEPT_CODE,
             营业部名称: row.OPERATEDEPT_NAME,
-            最近上榜日: dayjs(row.ONLIST_DATE).format('YYYY-MM-DD'),
+            最近上榜日: dayjs(row.ONLIST_DATE).format('YYYYMMDD'),
             买入的股票: row.STOCK_DETAILS,
             次数总计_买入: (row.BUYER_NUM),
             次数总计_卖出: (row.SELLER_NUM),

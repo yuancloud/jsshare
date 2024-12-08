@@ -82,6 +82,7 @@ async function stock_sector_detail(sector = 'gn_gfgn') {
             item.sell = parseFloat(item.sell);
             item.settlement = parseFloat(item.settlement);
             item.trade = parseFloat(item.trade);
+            item.ticktime = item.ticktime?.replace(":", "");
         })
         return bigData;
     } catch (error) {

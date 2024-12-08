@@ -38,7 +38,7 @@ async function stock_zh_a_tick_tx_js(symbol = "sz000001") {
     }
     let result = big_df.map(item => {
         return {
-            成交时间: item[1],
+            成交时间: item[1]?.replace(/:/g, ''),
             成交价格: parseFloat(item[2]),
             价格变动: parseFloat(item[3]),
             成交量: parseInt(item[4]),

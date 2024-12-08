@@ -28,14 +28,14 @@ async function stock_dividend_cninfo(symbol = "600009") {
         const response = await axios.post(url, null, { params, headers });
         const records = response.data.records;
         const result = records.map(record => ({
-            实施方案公告日期: record.F006D,
+            实施方案公告日期: record.F006D?.replace(/-/g, ''),
             送股比例: record.F010N,
             转增比例: record.F011N,
             派息比例: record.F012N,
-            股权登记日: record.F018D,
+            股权登记日: record.F018D?.replace(/-/g, ''),
             除权日: record.F020D,
             派息日: record.F023D,
-            股份到账日: record.F025D,
+            股份到账日: record.F025D?.replace(/-/g, ''),
             实施方案分红说明: record.F007V,
             分红类型: record.F044V,
             报告时间: record.F001V

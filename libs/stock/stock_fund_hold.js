@@ -1,4 +1,7 @@
 const axios = require('axios');
+const util = require('../util/util.js');
+const dayjs = require('dayjs');
+
 ///东方财富网-数据中心-主力数据-基金持仓
 async function stock_report_fund_hold(symbol = '基金持仓', date = '20210331') {
     const symbolMap = {
@@ -41,7 +44,7 @@ async function stock_report_fund_hold(symbol = '基金持仓', date = '20210331'
             序号: index + 1,
             "内部代码": row.SECURITY_INNER_CODE,
             "股票简称": row.SECURITY_NAME_ABBR,
-            "报告日期": row.REPORT_DATE,
+            "报告日期": dayjs(row.REPORT_DATE).format("YYYYMMDD"),
             "机构类型": row.ORG_TYPE,
             "持有基金家数": row.HOULD_NUM,
             "持股总数": row.TOTAL_SHARES,
@@ -102,7 +105,7 @@ async function stock_report_fund_hold_detail(symbol = "008286", date = "20220331
             "股票代码": row.SECURITY_CODE,
             "内部代码": row.SECURITY_INNER_CODE,
             "股票简称": row.SECURITY_NAME_ABBR,
-            "报告日期": row.REPORT_DATE.replace(' 00:00:00', ""),
+            "报告日期": dayjs(row.REPORT_DATE).format("YYYYMMDD"),
             "持有人代码": row.HOLDER_CODE,
             "持有人名称": row.HOLDER_NAME,
             "母机构代码": row.PARENT_ORG_CODE,

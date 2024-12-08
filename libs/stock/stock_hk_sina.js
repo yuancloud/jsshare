@@ -468,12 +468,11 @@ async function stock_hk_spot() {
 
 ///新浪财经-港股-个股的历史行情数据
 async function stock_hk_daily(symbol = "00981", adjust = "qfq") {
-    let hk_sina_stock_hist_qfq_url = "https://finance.sina.com.cn/stock/hkstock/{}/qfq.js"
     let response = await axios.get(`https://finance.sina.com.cn/stock/hkstock/${symbol}/klc_kl.js`);
     let str = response.data.split("=")[1].split(";")[0].replace(/"/g, "");
     let records = decoder(str)
     records.forEach(e => {
-        e.date = dayjs(e.date).format('YYYY-MM-DD')
+        e.date = dayjs(e.date).format('YYYYMMDD')
     });
     if (adjust === '') {
         return records

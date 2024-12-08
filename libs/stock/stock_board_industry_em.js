@@ -1,7 +1,4 @@
 const axios = require('axios');
-const util = require('../util/util.js');
-const dayjs = require('dayjs');
-const _ = require('lodash');
 ///东方财富网-沪深板块-行业板块-名称
 async function stock_board_industry_name_em() {
     const url = "https://17.push2.eastmoney.com/api/qt/clist/get";
@@ -132,7 +129,7 @@ async function stock_board_industry_hist_em(
 
         const temp_df = data_json.data.klines.map(kline => kline.split(","));
         const result = temp_df.map(row => ({
-            "日期": row[0],
+            "日期": row[0]?.replace(/-/g, ''),
             "开盘": parseFloat(row[1]),
             "收盘": parseFloat(row[2]),
             "最高": parseFloat(row[3]),

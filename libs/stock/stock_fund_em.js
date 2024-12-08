@@ -3,8 +3,7 @@ const util = require('../util/util.js');
 const dayjs = require('dayjs');
 const _ = require('lodash');
 ///东方财富网-数据中心-资金流向-个股
-async function stock_individual_fund_flow(stock = "600094", market = "sh") {
-    const marketMap = { "sh": 1, "sz": 0, "bj": 0 };
+async function stock_individual_fund_flow(symbol = "600094") {
     const url = "https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get";
     const headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36",
@@ -12,7 +11,7 @@ async function stock_individual_fund_flow(stock = "600094", market = "sh") {
     const params = {
         lmt: "0",
         klt: "101",
-        secid: `${marketMap[market]}.${stock}`,
+        secid: `${util.get_market_number(symbol)}.${symbol}`,
         fields1: "f1,f2,f3,f7",
         fields2: "f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61,f62,f63,f64,f65",
         ut: "b2884a393a59ad64002292a3e90d46a5",
@@ -25,7 +24,7 @@ async function stock_individual_fund_flow(stock = "600094", market = "sh") {
         let result = records.map(row => {
             let items = row.split(',')
             return {
-                日期: items[0],
+                日期: items[0]?.replace(/-/g, ''),
                 主力净流入: parseFloat(items[1]),
                 小单净流入: parseFloat(items[2]),
                 中单净流入: parseFloat(items[3]),
@@ -82,7 +81,8 @@ async function stock_individual_fund_flow_rank(indicator = "10日") {
                     "今日涨跌幅": row.f3,          // Accessing f3 field from row
                     "代码": row.f12,               // Accessing f12 field from row
                     "名称": row.f14,               // Accessing f14 field from row
-                    "今日主力净流入-净额": row.f62,  // Accessing f62 field from row
+                    "今日主力净流入-净额": row.f62,
+                    "今日主力净流入-净占比": row.f184,  // Accessing f62 field from row
                     "今日超大单净流入-净额": row.f66, // Accessing f66 field from row
                     "今日超大单净流入-净占比": row.f69, // Accessing f69 field from row
                     "今日大单净流入-净额": row.f72, // Accessing f72 field from row
@@ -91,8 +91,6 @@ async function stock_individual_fund_flow_rank(indicator = "10日") {
                     "今日中单净流入-净占比": row.f81, // Accessing f81 field from row
                     "今日小单净流入-净额": row.f84, // Accessing f84 field from row
                     "今日小单净流入-净占比": row.f87, // Accessing f87 field from row
-                    "今日主力净流入-净额": row.f124, // Accessing f124 field from row
-                    "今日主力净流入-净占比": row.f184  // Accessing f184 field from row
                 }))
                 break;
             case "3日":
@@ -196,7 +194,7 @@ async function stock_market_fund_flow() {
         const result = records.map(row => {
             let items = row.split(',')
             return {
-                "日期": items[0],
+                "日期": items[0]?.replace(/-/g, ''),
                 "主力净流入-净额": items[1],
                 "小单净流入-净额": items[2],
                 "中单净流入-净额": items[3],
@@ -498,7 +496,7 @@ async function stock_sector_fund_flow_hist(symbol = '电源设备') {
         const result = records.map(row => {
             let items = row.split(",");
             return {
-                日期: items[0],
+                日期: items[0]?.replace(/-/g, ''),
                 '主力净流入-净额': parseFloat(items[1]),
                 '小单净流入-净额': parseFloat(items[2]),
                 '中单净流入-净额': parseFloat(items[3]),
@@ -571,7 +569,7 @@ async function stock_concept_fund_flow_hist(symbol = "锂电池") {
         const result = records.map(row => {
             let items = row.split(",");
             return {
-                日期: items[0],
+                日期: items[0]?.replace(/-/g, ''),
                 '主力净流入-净额': parseFloat(items[1]),
                 '小单净流入-净额': parseFloat(items[2]),
                 '中单净流入-净额': parseFloat(items[3]),
